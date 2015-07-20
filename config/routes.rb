@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :students
   devise_for :parents
   resources :parents
   # The priority is based upon order of creation: first created -> highest priority.
