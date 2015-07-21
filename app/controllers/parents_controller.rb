@@ -1,10 +1,11 @@
 class ParentsController < ApplicationController
-  before_action :set_parent, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_parent!
+  load_and_authorize_resource
 
   # GET /parents
   # GET /parents.json
   def index
+    authorize! :index, nil
     @parents = Parent.all
   end
 
@@ -15,7 +16,6 @@ class ParentsController < ApplicationController
 
   # GET /parents/new
   def new
-    @parent = Parent.new
   end
 
   # GET /parents/1/edit
@@ -25,8 +25,6 @@ class ParentsController < ApplicationController
   # POST /parents
   # POST /parents.json
   def create
-    @parent = Parent.new(parent_params)
-
     respond_to do |format|
       if @parent.save
         format.html { redirect_to @parent, notice: 'Parent was successfully created.' }
@@ -41,8 +39,19 @@ class ParentsController < ApplicationController
   # PATCH/PUT /parents/1
   # PATCH/PUT /parents/1.json
   def update
+    if parent_params[:password].blank?
+      parent_params.delete(:password)
+      parent_params.delete(:password_confirmation)
+    end
+
+    successfully_updated = if needs_password?(@parent, parent_params)
+                             @parent.update(parent_params)
+                           else
+                             @parent.update_without_password(parent_params)
+                           end
+
     respond_to do |format|
-      if @parent.update(parent_params)
+      if successfully_updated
         format.html { redirect_to @parent, notice: 'Parent was successfully updated.' }
         format.json { render :show, status: :ok, location: @parent }
       else
@@ -62,14 +71,16 @@ class ParentsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_parent
-      @parent = Parent.find(params[:id])
-    end
+  protected
+  def needs_password?(_, params)
+    params[:password].present?
+  end
 
+  private
     # Never trust parameters from the scary internet, only allow the white list through.
     def parent_params
-      params.require(:parent).permit(:first_name, :last_name, :email, :phone_number, :school, :role)
+      params.require(:parent).permit(
+        :first_name, :last_name, :email, :password, :password_confirmation,
+        :phone_number, :school, :role)
     end
 end

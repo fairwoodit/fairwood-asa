@@ -4,9 +4,15 @@ class Parent < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :students
+
   before_save :update_role_if_nil
 
   def update_role_if_nil
     self.role = Role::NORMAL if role.blank?
+  end
+
+  def admin?
+    role == Role::ADMIN
   end
 end

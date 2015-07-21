@@ -5,13 +5,20 @@ class ApplicationController < ActionController::Base
   # noinspection RailsParamDefResolve
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access denied!"
+    redirect_to root_url
+  end
+
   protected
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:first_name, :last_name, :email, :password, :phone_number, :school, :role)
-    end
-    devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(:first_name, :last_name, :email, :password, :phone_number, :school, :role)
-    end
+    devise_parameter_sanitizer.for(:sign_up) << :first_name << :last_name << :phone_number << :school
+    devise_parameter_sanitizer.for(:account_update) << :first_name << :last_name << :phone_number << :school
+  end
+
+  # CanCanCan requires a current_user method. Devise gives us a current_parent method
+  # because our user model is "parent".
+  def current_user
+    current_parent
   end
 end

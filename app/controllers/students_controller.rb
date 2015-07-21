@@ -1,11 +1,11 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_parent!
+  load_and_authorize_resource
 
   # GET /students
   # GET /students.json
   def index
-    @students = Student.where(parent: current_parent)
+    @students = current_parent.students
   end
 
   # GET /students/1
@@ -15,7 +15,6 @@ class StudentsController < ApplicationController
 
   # GET /students/new
   def new
-    @student = Student.new
   end
 
   # GET /students/1/edit
@@ -25,7 +24,6 @@ class StudentsController < ApplicationController
   # POST /students
   # POST /students.json
   def create
-    @student = Student.new(student_params)
     @student.parent = current_parent
 
     respond_to do |format|
@@ -64,11 +62,6 @@ class StudentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_student
-      @student = Student.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       params.require(:student).permit(:first_name, :last_name, :parent_id, :grade, :teacher)
