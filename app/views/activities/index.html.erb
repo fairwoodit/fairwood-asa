@@ -1,38 +1,6 @@
 <h1>Activities</h1>
 
-<% @activities.each do |activity| %>
-  <div>
-    <span style="font-size: 24px;"><%= activity.name %></span>
-    with <em><%= activity.instructor %></em> for <strong><%= money(activity.cost) %></strong>
-    &nbsp;&nbsp;<%= link_to "Register Now!", new_registration_path(activity_id: activity.id) %>
-    <% if current_parent.admin? %>
-      &nbsp;&nbsp;
-      <% unless activity.visible %>
-        <span class="glyphicon glyphicon-eye-close" style="color:orangered;" title="Not visible in activity list" data-toggle="tooltip"></span>
-      <% end %>
-
-      <%= link_to(edit_activity_path(activity)) do %>
-        <span class="glyphicon glyphicon-pencil"/>
-      <% end %>
-      <%= link_to(activity, method: :delete, data: { confirm: 'Are you sure?' }) do %>
-        <span class="glyphicon glyphicon-trash"/>
-      <% end %>
-    <% end %>
-    <br>
-    <%= activity.start.strftime("%m/%d/%Y") %> - <%= activity.end.strftime("%m/%d/%Y") %>,
-    <%= activity.times %>
-    <div id="show-desc-<%= activity.id %>-div">
-
-      <a href="#" id="show-desc-<%= activity.id %>" onclick="showDescription(<%= activity.id %>);">
-        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp;Show
-        description</a>
-    </div>
-    <div style="margin-top: 10px; display: none" id="desc-<%= activity.id %>">
-      <%= activity.description.gsub("\n", "<br>").html_safe %>
-    </div>
-  </div>
-  <hr>
-<% end %>
+<%= render partial: 'activity', collection: @activities %>
 
 <% if current_parent.admin? %>
   <br>
