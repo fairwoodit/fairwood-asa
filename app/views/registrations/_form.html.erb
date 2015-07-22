@@ -1,0 +1,31 @@
+<%= bootstrap_form_for(@registration, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-6') do |f| %>
+  <%= f.hidden_field :activity_id %>
+  <%= f.static_control 'Activity' do %>
+    <%= @registration.activity.name %>
+  <% end %>
+  <%= f.collection_select(:student_id, unassigned_students(@registration), :id, :first_name) %>
+  <%= f.form_group do %>
+    <%= f.check_box :low_income,
+                    label: 'I am interested in a low-income slot for this activity.' %>
+    <div id="committed_container" class="col-sm-offset-1" style="display: none">
+      <%= f.check_box :committed,
+                      label: 'If I do not get a low-income slot, I am still interested in registering for this activity.' %>
+    </div>
+    <% if current_parent.admin? %>
+      <%= f.check_box :paid %>
+    <% end %>
+  <% end %>
+  <%= f.submit nil, { class: "btn-primary col-md-offset-5" } %>
+<% end %>
+
+<script type="text/javascript">
+  $(function() {
+    $('#registration_low_income').change(function() {
+      if ($(this).is(':checked')) {
+        $('#committed_container').show();
+      } else {
+        $('#committed_container').hide();
+      }
+    })
+  })
+</script>

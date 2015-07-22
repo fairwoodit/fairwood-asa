@@ -1,6 +1,2 @@
-<h1>Editing Activity</h1>
-
+<% provide(:panel_title, "Edit Activity: #{@activity.name}") %>
 <%= render 'form' %>
-
-<%= link_to 'Show', @activity %> |
-<%= link_to 'Back', activities_path %>

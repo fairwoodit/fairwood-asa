@@ -1,41 +1,50 @@
-<h1>Listing Activities</h1>
+<h1>Activities</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Instructor</th>
-      <th>Description</th>
-      <th>Start</th>
-      <th>End</th>
-      <th>Times</th>
-      <th>Seats</th>
-      <th>Visible</th>
-      <th>Lakewood eligibility date</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @activities.each do |activity| %>
+  <div>
+    <span style="font-size: 24px;"><%= activity.name %></span>
+    with <%= activity.instructor %>
+    &nbsp;&nbsp;<%= link_to "Register Now!", new_registration_path(activity_id: activity.id) %>
+    <% if current_parent.admin? %>
+      &nbsp;&nbsp;
+      <% unless activity.visible %>
+        <span class="glyphicon glyphicon-eye-close" style="color:orangered;" title="Not visible in activity list" data-toggle="tooltip"></span>
+      <% end %>
 
-  <tbody>
-    <% @activities.each do |activity| %>
-      <tr>
-        <td><%= activity.name %></td>
-        <td><%= activity.instructor %></td>
-        <td><%= activity.description %></td>
-        <td><%= activity.start %></td>
-        <td><%= activity.end %></td>
-        <td><%= activity.times %></td>
-        <td><%= activity.seats %></td>
-        <td><%= activity.visible %></td>
-        <td><%= activity.lakewood_eligibility_date %></td>
-        <td><%= link_to 'Show', activity %></td>
-        <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
-        <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <%= link_to(edit_activity_path(activity)) do %>
+        <span class="glyphicon glyphicon-pencil"/>
+      <% end %>
+      <%= link_to(activity, method: :delete, data: { confirm: 'Are you sure?' }) do %>
+        <span class="glyphicon glyphicon-trash"/>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
+    <br>
+    <%= activity.start.strftime("%m/%d/%Y") %> - <%= activity.end.strftime("%m/%d/%Y") %>,
+    <%= activity.times %>
+    <div id="show-desc-<%= activity.id %>-div">
 
-<br>
+      <a href="#" id="show-desc-<%= activity.id %>" onclick="showDescription(<%= activity.id %>);">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp;Show
+        description</a>
+    </div>
+    <div style="margin-top: 10px; display: none" id="desc-<%= activity.id %>">
+      <%= activity.description.gsub("\n", "<br>").html_safe %>
+    </div>
+  </div>
+  <hr>
+<% end %>
 
-<%= link_to 'New Activity', new_activity_path %>
+<% if current_parent.admin? %>
+  <br>
+  <%= link_to 'New Activity', new_activity_path %>
+<% end %>
+<script type="text/javascript">
+  function showDescription(id) {
+    $('#show-desc-' + id + '-div').hide();
+    $('#desc-' + id).show();
+  }
+
+  $(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  })
+</script>

@@ -1,53 +1,14 @@
-<%= form_for(@activity) do |f| %>
-  <% if @activity.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
-
-      <ul>
-      <% @activity.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<%= bootstrap_form_for(@activity, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-6') do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :instructor %>
+  <%= f.text_area :description, {rows: 8} %>
+  <%= f.date_select :start %>
+  <%= f.date_select :end %>
+  <%= f.text_field :times %>
+  <%= f.number_field :seats %>
+  <%= f.date_select :lakewood_eligibility_date %>
+  <%= f.form_group :visible do %>
+    <%= f.check_box :visible, label: 'This activity should be visible in the activity list.' %>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :instructor %><br>
-    <%= f.text_field :instructor %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :start %><br>
-    <%= f.date_select :start %>
-  </div>
-  <div class="field">
-    <%= f.label :end %><br>
-    <%= f.date_select :end %>
-  </div>
-  <div class="field">
-    <%= f.label :times %><br>
-    <%= f.text_field :times %>
-  </div>
-  <div class="field">
-    <%= f.label :seats %><br>
-    <%= f.number_field :seats %>
-  </div>
-  <div class="field">
-    <%= f.label :visible %><br>
-    <%= f.check_box :visible %>
-  </div>
-  <div class="field">
-    <%= f.label :lakewood_eligibility_date %><br>
-    <%= f.date_select :lakewood_eligibility_date %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.submit nil, { class: "btn-primary col-md-offset-5" } %>
 <% end %>

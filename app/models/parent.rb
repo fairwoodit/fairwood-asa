@@ -5,7 +5,7 @@ class Parent < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :students
-
+  has_many :registrations, through: :students
   before_save :update_role_if_nil
 
   def update_role_if_nil
