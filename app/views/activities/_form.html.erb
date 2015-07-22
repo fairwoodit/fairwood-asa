@@ -1,6 +1,7 @@
 <%= bootstrap_form_for(@activity, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-6') do |f| %>
   <%= f.text_field :name %>
   <%= f.text_field :instructor %>
+  <%= f.text_field :cost, prepend: "$", control_col: "col-sm-3" %>
   <%= f.text_area :description, {rows: 8} %>
   <%= f.date_select :start %>
   <%= f.date_select :end %>

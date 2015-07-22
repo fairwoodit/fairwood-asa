@@ -64,6 +64,6 @@ class ActivitiesController < ApplicationController
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def activity_params
-    params.require(:activity).permit(:name, :instructor, :description, :start, :end, :times, :seats, :visible, :lakewood_eligibility_date)
+    params.require(:activity).permit(:name, :instructor, :cost, :description, :start, :end, :times, :seats, :visible, :lakewood_eligibility_date)
   end
 end
