@@ -4,10 +4,16 @@ class Enrollment < ActiveRecord::Base
 
   before_save :fix_committed
 
+  after_create :send_mail
+
   scope :lifo, -> { order(id: :desc) }
 
   def fix_committed
     # Force committed to be true if we're not low income.
     self.committed = true unless low_income
+  end
+
+  def send_mail
+    UserMailer.enrolled_email(self).deliver_later
   end
 end

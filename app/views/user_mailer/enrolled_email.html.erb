@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+</head>
+<body>
+Dear <%= @user.first_name %>,
+
+<p>
+  You have successfully enrolled <strong><%= @enrollment.student.first_name %></strong>
+  in the <strong><%= @enrollment.activity.name %></strong> class, pending payment.
+</p>
+
+<p>
+  Please print this mail and return it to the Fairwood school office with
+  <%= money(@enrollment.activity.cost) %> cash or check payable to
+  <strong><%= @enrollment.activity.instructor %></strong>.
+</p>
+<p>
+  <strong>
+    IMPORTANT NOTE: Please provide payment within two days to guarantee your enrollment
+    spot. Due to large demand, we must fill activities with paid enrollments as early
+    as possible.
+  </strong>
+</p>
+<p>
+  Thank you, and we hope <%= @enrollment.student.first_name %> enjoys the class.
+</p>
+<p>
+  - The Fairwood Afterschool Activities Team
+</p>
+<hr>
+<p>
+  For ASA Team Use:
+  <table>
+    <tr>
+      <td>Enrollment Id:</td>
+      <td><%= @enrollment.id %></td>
+    </tr>
+    <tr>
+      <td>Activity Name:</td>
+      <td><%= @enrollment.activity.name %></td>
+    </tr>
+    <tr>
+      <td>Price:</td>
+      <td><%= money(@enrollment.activity.cost) %></td>
+    </tr>
+    <tr>
+      <td>Student Name:</td>
+      <td><%= @enrollment.student.full_name %></td>
+    </tr>
+    <tr>
+      <td>Parent Name:</td>
+      <td><%= @user.full_name %></td>
+    </tr>
+  </table>
+</p>
+</body>
+</html>
