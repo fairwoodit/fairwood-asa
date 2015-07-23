@@ -14,6 +14,9 @@ class EnrollmentsController < ApplicationController
   def show
   end
 
+  def success
+  end
+
   # GET /enrollments/new
   def new
     @enrollment.activity_id = params[:activity_id]
@@ -28,7 +31,7 @@ class EnrollmentsController < ApplicationController
   def create
     respond_to do |format|
       if @enrollment.save
-        format.html { redirect_to enrollments_path, notice: 'Enrollment was successfully created.' }
+        format.html { redirect_to enrollment_success_path(@enrollment.id) }
         format.json { render :show, status: :created, location: @enrollment }
       else
         format.html { render :new }

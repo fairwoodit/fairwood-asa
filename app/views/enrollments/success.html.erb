@@ -1,0 +1,17 @@
+<h3>Enrollment succeeded!</h3>
+
+<p>
+  You have successfully enrolled <strong><%= @enrollment.student.first_name %></strong>
+  in the <strong><%= @enrollment.activity.name %></strong> class, pending payment.
+</p>
+<p>
+  You will receive a confirmation email in a few minutes. Please check your junk mail
+  folder in case it gets filtered.
+</p>
+<p>
+  If you have any questions about activities, please
+  contact the afterschool activities team.<br>
+  Contact the <a href="mailto:fairwood-techsupport@googlegroups.com">IT</a> team for
+  technical issues with the site.
+</p>
+<%= link_to 'Home', root_path %>

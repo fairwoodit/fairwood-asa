@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :parents
   end
 
+  get '/enrollments/:id/success' => 'enrollments#success', as: :enrollment_success
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
