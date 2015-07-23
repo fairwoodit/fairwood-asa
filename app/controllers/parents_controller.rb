@@ -27,6 +27,7 @@ class ParentsController < ApplicationController
   def create
     respond_to do |format|
       if @parent.save
+        UserMailer.welcome_email(@parent).deliver_later
         format.html { redirect_to @parent, notice: 'Parent was successfully created.' }
         format.json { render :show, status: :created, location: @parent }
       else
