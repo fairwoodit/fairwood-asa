@@ -1,6 +1,6 @@
-class CreateRegistrations < ActiveRecord::Migration
+class CreateEnrollments < ActiveRecord::Migration
   def change
-    create_table :registrations do |t|
+    create_table :enrollments do |t|
       t.belongs_to :activity, index: true, foreign_key: true
       t.belongs_to :student, index: true, foreign_key: true
       t.boolean :low_income

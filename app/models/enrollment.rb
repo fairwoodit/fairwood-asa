@@ -1,4 +1,4 @@
-class Registration < ActiveRecord::Base
+class Enrollment < ActiveRecord::Base
   belongs_to :activity
   belongs_to :student
 

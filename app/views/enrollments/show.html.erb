@@ -1,0 +1,26 @@
+<p>
+  <strong>Activity:</strong>
+  <%= @enrollment.activity.name %>
+</p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @enrollment.student.first_name %>
+</p>
+
+<p>
+  <strong>Low income:</strong>
+  <%= @enrollment.low_income %>
+</p>
+
+<p>
+  <strong>Committed:</strong>
+  <%= @enrollment.committed %>
+</p>
+
+<p>
+  <strong>Paid:</strong>
+  <%= @enrollment.paid %>
+</p>
+
+<%= link_to 'Back', enrollments_path %>

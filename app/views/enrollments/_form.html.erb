@@ -1,9 +1,9 @@
-<%= bootstrap_form_for(@registration, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-6') do |f| %>
+<%= bootstrap_form_for(@enrollment, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-6') do |f| %>
   <%= f.hidden_field :activity_id %>
   <%= f.static_control 'Activity' do %>
-    <%= @registration.activity.name %>
+    <%= @enrollment.activity.name %>
   <% end %>
-  <%= f.collection_select(:student_id, unassigned_students(@registration), :id, :first_name) %>
+  <%= f.collection_select(:student_id, unassigned_students(@enrollment), :id, :first_name) %>
   <%= f.form_group do %>
     <%= f.check_box :low_income,
                     label: 'I am interested in a low-income slot for this activity.' %>
@@ -20,7 +20,7 @@
 
 <script type="text/javascript">
   $(function() {
-    $('#registration_low_income').change(function() {
+    $('#enrollment_low_income').change(function() {
       if ($(this).is(':checked')) {
         $('#committed_container').show();
       } else {

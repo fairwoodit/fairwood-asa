@@ -1,7 +1,7 @@
 <div>
   <span style="font-size: 24px;"><%= activity.name %></span>
   with <em><%= activity.instructor %></em> for <strong><%= money(activity.cost) %></strong>
-  &nbsp;&nbsp;<%= link_to "Register Now!", new_registration_path(activity_id: activity.id) %>
+  &nbsp;&nbsp;<%= link_to "Enroll Now!", new_enrollment_path(activity_id: activity.id) %>
   <% if current_parent.admin? %>
     &nbsp;&nbsp;
     <% unless activity.visible %>

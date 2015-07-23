@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :registrations
+  resources :enrollments
   resources :activities
   resources :students
   devise_for :parents

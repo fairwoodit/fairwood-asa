@@ -1,5 +1,5 @@
 class Student < ActiveRecord::Base
   belongs_to :parent
 
-  has_many :registrations
+  has_many :enrollments
 end

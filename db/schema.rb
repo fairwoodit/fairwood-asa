@@ -31,6 +31,19 @@ ActiveRecord::Schema.define(version: 20150722191127) do
     t.decimal  "cost",                      precision: 6, scale: 2
   end
 
+  create_table "enrollments", force: :cascade do |t|
+    t.integer  "activity_id"
+    t.integer  "student_id"
+    t.boolean  "low_income"
+    t.boolean  "committed"
+    t.boolean  "paid"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "enrollments", ["activity_id"], name: "index_enrollments_on_activity_id", using: :btree
+  add_index "enrollments", ["student_id"], name: "index_enrollments_on_student_id", using: :btree
+
   create_table "parents", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -54,19 +67,6 @@ ActiveRecord::Schema.define(version: 20150722191127) do
   add_index "parents", ["email"], name: "index_parents_on_email", unique: true, using: :btree
   add_index "parents", ["reset_password_token"], name: "index_parents_on_reset_password_token", unique: true, using: :btree
 
-  create_table "registrations", force: :cascade do |t|
-    t.integer  "activity_id"
-    t.integer  "student_id"
-    t.boolean  "low_income"
-    t.boolean  "committed"
-    t.boolean  "paid"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "registrations", ["activity_id"], name: "index_registrations_on_activity_id", using: :btree
-  add_index "registrations", ["student_id"], name: "index_registrations_on_student_id", using: :btree
-
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20150722191127) do
 
   add_index "students", ["parent_id"], name: "index_students_on_parent_id", using: :btree
 
-  add_foreign_key "registrations", "activities"
-  add_foreign_key "registrations", "students"
+  add_foreign_key "enrollments", "activities"
+  add_foreign_key "enrollments", "students"
   add_foreign_key "students", "parents"
 end

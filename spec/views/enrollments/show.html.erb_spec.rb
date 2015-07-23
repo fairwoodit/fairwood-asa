@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "registrations/show", type: :view do
+RSpec.describe "enrollments/show", type: :view do
   before(:each) do
-    @registration = assign(:registration, Registration.create!(
+    @enrollment = assign(:enrollment, Enrollment.create!(
       :activity => nil,
       :student => nil,
       :low_income => false,
