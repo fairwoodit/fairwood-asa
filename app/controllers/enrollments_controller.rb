@@ -22,6 +22,11 @@ class EnrollmentsController < ApplicationController
 
   # GET /enrollments/new
   def new
+    if current_parent.students.empty?
+      redirect_to(students_path,
+                  notice: 'You must create a student before enrolling in activities')
+    end
+
     @enrollment.activity_id = params[:activity_id]
   end
 
