@@ -17,7 +17,7 @@
   <% end %>
   <br>
   <%= activity.start.strftime("%m/%d/%Y") %> - <%= activity.end.strftime("%m/%d/%Y") %>,
-  <%= activity.times %>
+  <%= lcfirst(activity.times) %>
   <div id="show-desc-<%= activity.id %>-div">
 
     <a href="#" id="show-desc-<%= activity.id %>" onclick="showDescription(<%= activity.id %>);">
