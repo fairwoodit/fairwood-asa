@@ -4,12 +4,13 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
 </head>
 <body>
-<h1>Welcome to the Fairwood Activities site, <%= @user.first_name %></h1>
+<h2>Welcome to Fairwood Explorer After School Activities, <%= @user.first_name %></h2>
 
 <p>
-  You have successfully signed up for the service. Please be sure to add your
+  You have successfully signed up for the service with a login e-mail of
+  <strong><%= @user.email %></strong>. Please be sure to add your
   children / students in the <strong>My Students</strong> page and then you'll be
-  able to register for activities.
+  able to enroll in activities.
 </p>
 
 <p>
@@ -19,7 +20,7 @@
 <p>Thanks for joining and have a great day!</p>
 
 <p>
-  - The Fairwood Afterschool Activities Team
+  - The Fairwood Explorer Afterschool Activities Team
 </p>
 </body>
 </html>

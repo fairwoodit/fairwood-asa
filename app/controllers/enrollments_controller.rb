@@ -17,6 +17,9 @@ class EnrollmentsController < ApplicationController
   def success
   end
 
+  def low_income
+  end
+
   # GET /enrollments/new
   def new
     @enrollment.activity_id = params[:activity_id]
@@ -31,7 +34,13 @@ class EnrollmentsController < ApplicationController
   def create
     respond_to do |format|
       if @enrollment.save
-        format.html { redirect_to enrollment_success_path(@enrollment.id) }
+        format.html {
+          if @enrollment.low_income
+            redirect_to enrollment_low_income_path(@enrollment.id)
+          else
+            redirect_to enrollment_success_path(@enrollment.id)
+          end
+        }
         format.json { render :show, status: :created, location: @enrollment }
       else
         format.html { render :new }
@@ -65,8 +74,8 @@ class EnrollmentsController < ApplicationController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def enrollment_params
-      params.require(:enrollment).permit(:activity_id, :student_id, :low_income, :committed, :paid)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def enrollment_params
+    params.require(:enrollment).permit(:activity_id, :student_id, :low_income, :committed, :paid)
+  end
 end

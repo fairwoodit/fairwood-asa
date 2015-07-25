@@ -11,4 +11,8 @@ module ApplicationHelper
   def friendly_boolean(val)
     val ? 'yes' : 'no'
   end
+
+  def lcfirst(str)
+    str[0].downcase + str[1..-1]
+  end
 end

@@ -14,6 +14,10 @@ class Enrollment < ActiveRecord::Base
   end
 
   def send_mail
-    UserMailer.enrolled_email(self).deliver_later
+    if low_income
+      UserMailer.low_income_enrollment_email(self).deliver_later
+    else
+      UserMailer.enrolled_email(self).deliver_later
+    end
   end
 end

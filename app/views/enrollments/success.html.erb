@@ -2,7 +2,12 @@
 
 <p>
   You have successfully enrolled <strong><%= @enrollment.student.first_name %></strong>
-  in the <strong><%= @enrollment.activity.name %></strong> class, pending payment.
+  in the <strong><%= @enrollment.activity.name %></strong> activity, pending payment.
+</p>
+<p>
+  This activity will take place from <%= @enrollment.activity.start.strftime("%m/%d/%Y") %> to
+  <%= @enrollment.activity.end.strftime("%m/%d/%Y") %>,
+  <%= lcfirst(@enrollment.activity.times) %>.
 </p>
 <p>
   You will receive a confirmation email in a few minutes. Please check your junk mail
