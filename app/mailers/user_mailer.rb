@@ -6,7 +6,7 @@ class UserMailer < ApplicationMailer
 
   def welcome_email(user)
     @user = user
-    mail(to: @user.email, subject: 'Welcome to the Fairwood Activities Site')
+    mail(to: @user.email, subject: 'Welcome to Fairwood Explorer Afterschool Activities')
   end
 
   def enrolled_email(enrollment)
@@ -14,6 +14,15 @@ class UserMailer < ApplicationMailer
     @activity = enrollment.activity
     @user = @enrollment.student.parent
     mail(to: @user.email, subject: 'You are enrolled!')
+  end
+
+  def waiting_list_email(enrollment)
+    @enrollment = enrollment
+    @activity = enrollment.activity
+    @user = @enrollment.student.parent
+    @waiting = true
+    mail(to: @user.email, subject: 'You are on the waiting list!',
+         template_name: 'enrolled_email')
   end
 
   def low_income_enrollment_email(enrollment)

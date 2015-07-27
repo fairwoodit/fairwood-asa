@@ -1,0 +1,16 @@
+<h3>Your enrollment is pending!</h3>
+
+<p>
+  Thank you for your request to be added to the waiting list for the
+  <strong><%= @enrollment.activity.name %></strong> class for
+  <%= @enrollment.student.first_name %>. You will be notified whether or not your
+  enrollment has been approved within one week, based on the number of earlier
+  enrollments that submit payment.
+</p>
+
+<p>
+  You will receive a confirmation email in a few minutes. Please check your junk mail
+  folder in case it gets filtered, and follow the payment instructions in that mail.
+  Thanks!
+</p>
+<%= link_to 'Home', root_path %>

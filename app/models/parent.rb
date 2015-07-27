@@ -24,4 +24,8 @@ class Parent < ActiveRecord::Base
   def admin?
     role == Role::ADMIN
   end
+
+  def lakewood?
+    school == School::LAKEWOOD
+  end
 end

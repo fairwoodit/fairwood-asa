@@ -5,8 +5,8 @@
   in the <strong><%= @enrollment.activity.name %></strong> activity, pending payment.
 </p>
 <p>
-  This activity will take place from <%= @enrollment.activity.start.strftime("%m/%d/%Y") %> to
-  <%= @enrollment.activity.end.strftime("%m/%d/%Y") %>,
+  This activity will take place from <%= friendly_date(@enrollment.activity.start) %> to
+  <%= friendly_date(@enrollment.activity.end) %>,
   <%= lcfirst(@enrollment.activity.times) %>.
 </p>
 <p>

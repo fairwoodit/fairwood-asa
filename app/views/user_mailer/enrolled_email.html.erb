@@ -7,15 +7,25 @@
 
 Dear <%= @user.first_name %>,
 
-<p>
-  You have successfully enrolled <strong><%= @enrollment.student.first_name %></strong>
-  in the <strong><%= @activity.name %></strong> class, pending payment.
-</p>
+<% if @waiting %>
+  <p>
+    Thank you for your request to be added to the waiting list for the
+    <strong><%= @enrollment.activity.name %></strong> class for
+    <%= @enrollment.student.first_name %>. You will be notified whether or not your
+    enrollment has been approved within one week, based on the number of earlier
+    enrollments that submit payment.
+  </p>
+<% else %>
+  <p>
+    You have successfully enrolled <strong><%= @enrollment.student.first_name %></strong>
+    in the <strong><%= @activity.name %></strong> class, pending payment.
+  </p>
+<% end %>
 
 <p>
   This activity will take place
-  from <%= @activity.start.strftime("%m/%d/%Y") %> to
-  <%= @activity.end.strftime("%m/%d/%Y") %>,
+  from <%= friendly_date(@activity.start) %> to
+  <%= friendly_date(@activity.end) %>,
   <%= lcfirst(@activity.times) %>. It requires a minimum of <%= @activity.min_seats %>
   students and a waiting list begins after <%= @activity.max_seats %> students are
   enrolled.
@@ -34,9 +44,15 @@ Dear <%= @user.first_name %>,
 
 <p>
   <strong>
-    IMPORTANT NOTE: Please provide payment within two days to guarantee your enrollment
-    spot. Due to large demand, we must fill activities with paid enrollments as early
-    as possible.
+    <% if @waiting %>
+      IMPORTANT NOTE: Please provide payment within two days to hold your spot on the
+      waiting list. You will receive a full refund if your enrollment is ultimately
+      denied.
+    <% else %>
+      IMPORTANT NOTE: Please provide payment within two days to guarantee your enrollment
+      spot. Due to large demand, we must fill activities with paid enrollments as early
+      as possible.
+    <% end %>
   </strong>
 </p>
 
@@ -51,6 +67,12 @@ Dear <%= @user.first_name %>,
 <p>
   For ASA Team Use:
 <table>
+  <% if @waiting %>
+    <tr>
+      <td><strong>Waiting list:</strong></td>
+      <td><strong>Yes</strong></td>
+    </tr>
+  <% end %>
   <tr>
     <td>Enrollment Id:</td>
     <td><%= @enrollment.id %></td>

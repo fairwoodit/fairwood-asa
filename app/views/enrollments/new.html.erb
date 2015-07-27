@@ -1,2 +1,2 @@
-<% provide(:panel_title, 'New Enrollment') %>
+<% provide(:panel_title, @waiting ? 'Add to waiting list' : 'New Enrollment') %>
 <%= render 'form' %>

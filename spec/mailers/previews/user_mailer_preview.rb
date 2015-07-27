@@ -4,6 +4,10 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.enrolled_email(Enrollment.last)
   end
 
+  def waiting_list_email
+    UserMailer.waiting_list_email(Enrollment.last)
+  end
+
   def low_income_enrollment_email
     UserMailer.low_income_enrollment_email(Enrollment.last)
   end

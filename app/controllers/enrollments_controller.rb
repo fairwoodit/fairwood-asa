@@ -1,4 +1,5 @@
 class EnrollmentsController < ApplicationController
+  include EnrollmentsHelper
   layout 'paneled', only: [:new, :edit]
 
   load_and_authorize_resource
@@ -17,6 +18,9 @@ class EnrollmentsController < ApplicationController
   def success
   end
 
+  def waiting_list
+  end
+
   def low_income
   end
 
@@ -28,6 +32,7 @@ class EnrollmentsController < ApplicationController
     end
 
     @enrollment.activity_id = params[:activity_id]
+    @waiting = params[:waiting]
   end
 
   # GET /enrollments/1/edit
@@ -41,8 +46,13 @@ class EnrollmentsController < ApplicationController
       if @enrollment.save
         format.html {
           if @enrollment.low_income
+            UserMailer.low_income_enrollment_email(@enrollment).deliver_later
             redirect_to enrollment_low_income_path(@enrollment.id)
+          elsif is_waiting(@enrollment)
+            UserMailer.waiting_list_email(@enrollment).deliver_later
+            redirect_to enrollment_waiting_list_path(@enrollment.id)
           else
+            UserMailer.enrolled_email(@enrollment).deliver_later
             redirect_to enrollment_success_path(@enrollment.id)
           end
         }

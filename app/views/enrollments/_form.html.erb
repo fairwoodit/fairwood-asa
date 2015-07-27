@@ -15,17 +15,25 @@
       <%= f.check_box :paid %>
     <% end %>
   <% end %>
-  <%= f.submit nil, { class: "btn-primary col-md-offset-5" } %>
+  <%= f.submit((@waiting ? 'Add to waiting list': 'Enroll!'), { class: "btn-primary col-sm-offset-5" }) %>
 <% end %>
 
 <script type="text/javascript">
   $(function() {
-    $('#enrollment_low_income').change(function() {
+    var low_income = $('#enrollment_low_income');
+    low_income.change(function() {
       if ($(this).is(':checked')) {
         $('#committed_container').show();
       } else {
         $('#committed_container').hide();
       }
-    })
+    });
+
+    // For page load (edit)
+    if (low_income.is(':checked')) {
+      $('#committed_container').show();
+    } else {
+      $('#committed_container').hide();
+    }
   })
 </script>
