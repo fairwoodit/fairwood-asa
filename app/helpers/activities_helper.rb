@@ -30,7 +30,7 @@ module ActivitiesHelper
     # A-B is the set of students who haven't yet enrolled.
     eligible_students = current_parent.students.eligible(activity.min_grade,
                                                          activity.max_grade)
-    (eligible_students - activity.students).compact.length
+    eligible_students.nil? ? 0 : (eligible_students - activity.students).compact.length
   end
 
   def category_options(activity_list)
