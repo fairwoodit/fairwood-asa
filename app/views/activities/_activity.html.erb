@@ -33,13 +33,13 @@
   <br>
   <%= friendly_date(activity.start) %> - <%= friendly_date(activity.end) %>,
   <%= lcfirst(activity.times) %>
-  <div id="show-desc-<%= activity.id %>-div">
+  <div id="show-desc-<%= activity.id %>-div" style="display: none">
 
     <a href="#" id="show-desc-<%= activity.id %>" onclick="showDescription(<%= activity.id %>);">
       <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp;Show
       description</a>
   </div>
-  <div style="margin-top: 10px; display: none" id="desc-<%= activity.id %>">
+  <div style="margin-top: 10px;" id="desc-<%= activity.id %>">
     <%= activity.description.gsub("\n", "<br>").html_safe %>
   </div>
 </div>
