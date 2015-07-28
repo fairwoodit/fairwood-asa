@@ -1,5 +1,7 @@
 <h1>Activities</h1>
 
+Category: <%= select_tag('category', options_for_select(category_options(@activities))) %>
+<hr>
 <%= render partial: 'activity', collection: @activities %>
 
 <% if current_parent.admin? %>
@@ -14,5 +16,16 @@
 
   $(function() {
     $('[data-toggle="tooltip"]').tooltip();
-  })
+
+    // Change handler for category.
+    $('#category').change(function() {
+      var category = $(this).val();
+      if (category == "All") {
+        $('.activity').show();
+      } else {
+        $('.activity').hide();
+        $('[data-category="' + category + '"]').show();
+      }
+    });
+  });
 </script>

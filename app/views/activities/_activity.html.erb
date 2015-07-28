@@ -1,4 +1,4 @@
-<div>
+<div class="activity" data-category="<%= activity.category %>">
   <span style="font-size: 24px;"><%= activity.name %></span>
   with <em><%= activity.instructor %></em> for
   <strong><%= money(activity.cost) %></strong>
@@ -46,5 +46,5 @@
   <div style="margin-top: 10px;" id="desc-<%= activity.id %>">
     <%= activity.description.gsub("\n", "<br>").html_safe %>
   </div>
+  <hr>
 </div>
-<hr>

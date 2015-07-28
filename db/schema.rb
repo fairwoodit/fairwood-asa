@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728121229) do
+ActiveRecord::Schema.define(version: 20150728150647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20150728121229) do
     t.boolean  "cash_only"
     t.integer  "min_grade",                                         default: 0, null: false
     t.integer  "max_grade",                                         default: 5, null: false
+    t.string   "category"
   end
 
   create_table "enrollments", force: :cascade do |t|

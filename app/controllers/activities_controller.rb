@@ -67,6 +67,6 @@ class ActivitiesController < ApplicationController
     params.require(:activity).permit(:name, :instructor, :cost, :description,
                                      :start, :end, :times, :min_seats, :max_seats,
                                      :visible, :lakewood_eligibility_date, :cash_only,
-                                     :min_grade, :max_grade)
+                                     :min_grade, :max_grade, :category)
   end
 end
