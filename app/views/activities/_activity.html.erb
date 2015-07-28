@@ -3,9 +3,13 @@
   with <em><%= activity.instructor %></em> for
   <strong><%= money(activity.cost) %></strong>
   &nbsp;&nbsp;
+  <%= grade_range(activity) %>
+  &nbsp;&nbsp;
   <% if current_parent.lakewood? && activity.lakewood_eligibility_date > Time.now %>
     <span class="label-warning">Lakewood parents may register starting
       <%= friendly_date(activity.lakewood_eligibility_date) %></span>
+  <% elsif unenrolled_student_count(activity) == 0 %>
+    <span class="label-info">All of your eligible students are already registered for this activity.</span>
   <% else %>
     <% remaining_seats = activity.remaining_seats %>
     <% if remaining_seats < 4 && remaining_seats > 0 %>

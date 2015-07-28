@@ -5,6 +5,8 @@
   <%= f.form_group do %>
     <%= f.check_box :cash_only %>
   <% end %>
+  <%= f.number_field :min_grade, min: 0, max: 5, step: 1 %>
+  <%= f.number_field :max_grade, min: 0, max: 5, step: 1 %>
   <%= f.text_area :description, { rows: 8 } %>
   <%= f.date_select :start %>
   <%= f.date_select :end %>

@@ -16,4 +16,20 @@ module ActivitiesHelper
       current_rank += 1
     end
   end
+
+  def grade_range(activity)
+    min = activity.min_grade
+    min = 'K' if min.nil? || min == 0
+    "#{min}-#{activity.max_grade}"
+  end
+
+  def unenrolled_student_count(activity)
+    # Get the list of students belonging to the logged-in user who are eligible
+    # for the activity (A).
+    # Find all students already enrolled for the activity (B).
+    # A-B is the set of students who haven't yet enrolled.
+    eligible_students = current_parent.students.eligible(activity.min_grade,
+                                                         activity.max_grade)
+    (eligible_students - activity.students).compact.length
+  end
 end

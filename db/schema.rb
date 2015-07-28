@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150725041611) do
+ActiveRecord::Schema.define(version: 20150728121229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,12 +25,14 @@ ActiveRecord::Schema.define(version: 20150725041611) do
     t.integer  "max_seats"
     t.boolean  "visible"
     t.date     "lakewood_eligibility_date"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
     t.text     "description"
     t.decimal  "cost",                      precision: 6, scale: 2
     t.integer  "min_seats"
     t.boolean  "cash_only"
+    t.integer  "min_grade",                                         default: 0, null: false
+    t.integer  "max_grade",                                         default: 5, null: false
   end
 
   create_table "enrollments", force: :cascade do |t|

@@ -29,14 +29,22 @@ class EnrollmentsController < ApplicationController
     if current_parent.students.empty?
       redirect_to(students_path,
                   notice: 'You must create a student before enrolling in activities')
-    end
+    else
+      @enrollment.activity_id = params[:activity_id]
+      @waiting = params[:waiting]
 
-    @enrollment.activity_id = params[:activity_id]
-    @waiting = params[:waiting]
+      @eligible_students = find_eligible_students
+      if @eligible_students.empty?
+        redirect_to(root_path,
+                    notice: 'All of your eligible students are already registered ' +
+                      'for this activity.')
+      end
+    end
   end
 
   # GET /enrollments/1/edit
   def edit
+    @eligible_students = find_eligible_students
   end
 
   # POST /enrollments
@@ -92,5 +100,19 @@ class EnrollmentsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def enrollment_params
     params.require(:enrollment).permit(:activity_id, :student_id, :low_income, :committed, :paid)
+  end
+
+  def find_eligible_students
+    # Get the list of students belonging to the logged-in user who are eligible
+    # for the activity (A).
+    # Find all students already enrolled for the activity (B).
+    # A-B is the set of students who haven't yet enrolled. However, if we're
+    # editing an enrollment, we want to include the current registrant in our list,
+    # so add that back in.
+    activity = @enrollment.activity
+    eligible_students = current_parent.students.eligible(activity.min_grade,
+                                                         activity.max_grade)
+    (eligible_students - activity.students + [@enrollment.student]).
+      compact.sort.uniq
   end
 end

@@ -3,7 +3,7 @@
   <%= f.static_control 'Activity' do %>
     <%= @enrollment.activity.name %>
   <% end %>
-  <%= f.collection_select(:student_id, unassigned_students(@enrollment), :id, :first_name) %>
+  <%= f.collection_select(:student_id, @eligible_students, :id, :first_name) %>
   <%= f.form_group do %>
     <%= f.check_box :low_income,
                     label: 'I am interested in a low-income slot for this activity.' %>
