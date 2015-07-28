@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728150647) do
+ActiveRecord::Schema.define(version: 20150728194146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,17 +22,17 @@ ActiveRecord::Schema.define(version: 20150728150647) do
     t.date     "start"
     t.date     "end"
     t.string   "times"
-    t.integer  "max_seats"
+    t.integer  "max_seats",                                         default: 100, null: false
     t.boolean  "visible"
     t.date     "lakewood_eligibility_date"
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
     t.text     "description"
-    t.decimal  "cost",                      precision: 6, scale: 2
-    t.integer  "min_seats"
+    t.decimal  "cost",                      precision: 6, scale: 2, default: 0.0, null: false
+    t.integer  "min_seats",                                         default: 1,   null: false
     t.boolean  "cash_only"
-    t.integer  "min_grade",                                         default: 0, null: false
-    t.integer  "max_grade",                                         default: 5, null: false
+    t.integer  "min_grade",                                         default: 0,   null: false
+    t.integer  "max_grade",                                         default: 5,   null: false
     t.string   "category"
   end
 
