@@ -82,6 +82,10 @@ Dear <%= @user.first_name %>,
     <td><%= @activity.name %></td>
   </tr>
   <tr>
+    <td>Grade Range:</td>
+    <td><%= grade_range(@activity) %></td>
+  </tr>
+  <tr>
     <td>Price:</td>
     <td><%= money(@activity.cost) %></td>
   </tr>

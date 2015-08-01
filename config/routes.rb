@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   end
   root :to => 'welcome#index'
 
+  get '/welcome' => 'welcome#index', as: :welcome
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

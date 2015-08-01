@@ -1,32 +1,3 @@
 <h1>My Enrollments</h1>
 
-<table class="table table-condensed table-bordered">
-  <thead>
-  <tr>
-    <th>Activity</th>
-    <th>Student</th>
-    <th>Low income slot</th>
-    <% if current_parent.admin? %>
-      <th>Committed</th>
-    <% end %>
-    <th>Paid</th>
-    <th></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @enrollments.each do |enrollment| %>
-    <tr>
-      <td><%= enrollment.activity.name %></td>
-      <td><%= enrollment.student.first_name %></td>
-      <td><%= friendly_boolean(enrollment.low_income) %></td>
-      <% if current_parent.admin? %>
-        <td><%= friendly_boolean(enrollment.committed) %></td>
-      <% end %>
-      <td><%= friendly_boolean(enrollment.paid) %></td>
-      <td><%= link_to 'Edit', edit_enrollment_path(enrollment) %>&nbsp;
-      <%= link_to 'Cancel', enrollment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<%= render partial: 'enrollments_table', locals: {enrollments: @enrollments} %>

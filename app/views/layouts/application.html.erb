@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FairwoodAsa</title>
+  <title>Fairwood Activities</title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="shortcut icon" href="/favicon3.ico" type="image/x-icon"/>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -23,6 +24,12 @@
         </li>
         <li class="<%= active_class(students_path) %>">
           <%= link_to 'My Students', students_path %>
+        </li>
+        <li class="<%= active_class('/ASA-Calendar-Fall2015.pdf') %>">
+          <%= link_to 'Calendar', '/ASA-Calendar-Fall2015.pdf' %>
+        </li>
+        <li class="<%= active_class(welcome_path) %>">
+          <%= link_to 'About', welcome_path %>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

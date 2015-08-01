@@ -9,14 +9,21 @@
     <span class="label-warning">Lakewood parents may register starting
       <%= friendly_date(activity.lakewood_eligibility_date) %></span>
   <% elsif unenrolled_student_count(activity) == 0 %>
-    <span class="label-info">All of your eligible students are already registered for this activity.</span>
+    <span class="label-info">
+      None of your unenrolled students meet the grade level
+      requirements.
+    </span>
   <% else %>
     <% remaining_seats = activity.remaining_seats %>
     <% if remaining_seats < 4 && remaining_seats > 0 %>
       <span class="label-warning">Only <%= remaining_seats %> spots left!</span>
     <% end %>
+    <% if remaining_seats < 0 %>
+      <span class="label-warning">There's a waiting list of <%= -remaining_seats %>
+        students.</span>
+    <% end %>
     <% if remaining_seats <= 0 %>
-      <%= link_to 'Join the wating list!', new_enrollment_path(activity_id: activity.id, waiting: 1) %>
+      <%= link_to 'Join the waiting list!', new_enrollment_path(activity_id: activity.id, waiting: 1) %>
     <% else %>
       <%= link_to "Enroll Now!", new_enrollment_path(activity_id: activity.id) %>
     <% end %>
@@ -27,6 +34,9 @@
       <span class="glyphicon glyphicon-eye-close" style="color:orangered;" title="Not visible in activity list" data-toggle="tooltip"></span>
     <% end %>
 
+    <%= link_to(activity) do %>
+      <span class="glyphicon glyphicon-expand"/>
+    <% end %>
     <%= link_to(edit_activity_path(activity)) do %>
       <span class="glyphicon glyphicon-pencil"/>
     <% end %>

@@ -14,6 +14,21 @@
 </p>
 
 <p>
+  <strong>Cash Only:</strong>
+  <%= friendly_boolean(@activity.cash_only) %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @activity.category %>
+</p>
+
+<p>
+  <strong>Grade Range:</strong>
+  <%= grade_range(@activity) %>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @activity.description %>
 </p>
@@ -34,8 +49,18 @@
 </p>
 
 <p>
-  <strong>Seats:</strong>
-  <%= @activity.seats %>
+  <strong>Min Seats:</strong>
+  <%= @activity.min_seats %>
+</p>
+
+<p>
+  <strong>Max Seats:</strong>
+  <%= @activity.max_seats %>
+</p>
+
+<p>
+  <strong>Lakewood eligibility date:</strong>
+  <%= @activity.lakewood_eligibility_date %>
 </p>
 
 <p>
@@ -44,9 +69,8 @@
 </p>
 
 <p>
-  <strong>Lakewood eligibility date:</strong>
-  <%= @activity.lakewood_eligibility_date %>
+  <strong>Enrollments:</strong>
+  <%= render partial: 'enrollments/enrollments_table', locals: {enrollments: @activity.enrollments} %>
 </p>
-
 <%= link_to 'Edit', edit_activity_path(@activity) %> |
 <%= link_to 'Back', activities_path %>

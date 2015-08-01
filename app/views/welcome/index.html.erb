@@ -1,9 +1,25 @@
 <h2>Welcome to the Fairwood Afterschool Activities Enrollment Service</h2>
-Please <%= link_to "sign up", new_parent_registration_path %> for an account,
-register your students, and then enroll into activities.
 
-Contact the afterschool activities team for questions about activities.
-Contact the <a href="mailto:fairwood-techsupport@googlegroups.com">IT</a> team for
-technical issues with the site.
-
-Thanks!
+<p>
+  This is the enrollment service for afterschool activities offered by the Fairwood
+  Explorer program.
+</p>
+<p>
+  Please
+  <% unless current_parent %>
+    <%= link_to "sign up", new_parent_registration_path %> for an account,
+  <% end %>
+  register your students
+  <% unless current_parent %>,
+  <% end %>
+  and then enroll into activities.
+</p>
+<p>
+  Contact <a href="mailto:marjorie.thibaut@hp.com">Marjorie Thibaut-Walker</a>
+  of the Afterschool Activities Team for questions about activities.
+  Contact the <a href="mailto:fairwood-techsupport@googlegroups.com">IT</a> team for
+  technical issues with the site.
+</p>
+<p>
+  Thanks!
+</p>
