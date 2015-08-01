@@ -2,8 +2,8 @@
   <span style="font-size: 24px;"><%= activity.name %></span>
   with <em><%= activity.instructor %></em> for
   <strong><%= money(activity.cost) %></strong>
-  &nbsp;&nbsp;
-  <%= grade_range(activity) %>
+  <br>
+  Grades: <%= grade_range(activity) %>
   &nbsp;&nbsp;
   <% if current_parent.lakewood? && activity.lakewood_eligibility_date > Time.now %>
     <span class="label-warning">Lakewood parents may register starting
@@ -25,7 +25,7 @@
     <% if remaining_seats <= 0 %>
       <%= link_to 'Join the waiting list!', new_enrollment_path(activity_id: activity.id, waiting: 1) %>
     <% else %>
-      <%= link_to "Enroll Now!", new_enrollment_path(activity_id: activity.id) %>
+      <%= link_to "Enroll Now!", new_enrollment_path(activity_id: activity.id), class: "btn btn-primary" %>
     <% end %>
   <% end %>
   <% if current_parent.admin? %>
