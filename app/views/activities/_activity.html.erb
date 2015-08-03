@@ -54,7 +54,7 @@
       description</a>
   </div>
   <div style="margin-top: 10px;" id="desc-<%= activity.id %>">
-    <%= activity.description.gsub("\n", "<br>").html_safe %>
+    <%= activity.description_as_html %>
   </div>
   <hr>
 </div>

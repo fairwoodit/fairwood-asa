@@ -30,6 +30,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 gem 'cancancan', '~> 1.10'
+gem 'kramdown'
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views

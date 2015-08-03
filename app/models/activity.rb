@@ -1,3 +1,5 @@
+require 'kramdown'
+
 class Activity < ActiveRecord::Base
   has_many :enrollments
   has_many :students, through: :enrollments
@@ -7,5 +9,9 @@ class Activity < ActiveRecord::Base
   def remaining_seats
     seats_taken = enrollments.where(committed: true).count
     max_seats - seats_taken
+  end
+
+  def description_as_html
+    Kramdown::Document.new(description).to_html.html_safe
   end
 end
