@@ -13,6 +13,6 @@ module ApplicationHelper
   end
 
   def lcfirst(str)
-    (str[0].downcase + str[1..-1]) if str
+    (str[0].downcase + str[1..-1]) if str && str[0]
   end
 end
