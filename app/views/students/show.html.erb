@@ -1,12 +1,4 @@
-<p>
-  <strong>First name:</strong>
-  <%= @student.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @student.last_name %>
-</p>
+<% provide(:panel_title, "Student: #{@student.first_name} #{@student.last_name}") %>
 
 <p>
   <strong>Grade:</strong>

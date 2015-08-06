@@ -15,4 +15,17 @@ module ApplicationHelper
   def lcfirst(str)
     (str[0].downcase + str[1..-1]) if str && str[0]
   end
+
+  def panel_title_div(title)
+    if title.present?
+      res = <<END
+<div class="panel-heading">
+  <h3 class="panel-title">#{title}</h3>
+</div>
+END
+      res.html_safe
+    else
+      ''
+    end
+  end
 end

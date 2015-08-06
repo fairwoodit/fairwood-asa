@@ -1,13 +1,15 @@
 class ActivitiesController < ApplicationController
-  layout 'paneled', only: [:new, :edit]
-
   load_and_authorize_resource
 
   # GET /activities
   # GET /activities.json
   def index
-    @activities = current_parent.admin? ? Activity.order(:name).all :
-      Activity.order(:name).visible
+    if current_parent.students.empty?
+      redirect_to students_path
+    else
+      @activities = current_parent.admin? ? Activity.order(:name).all :
+        Activity.order(:name).visible
+    end
   end
 
   # GET /activities/1

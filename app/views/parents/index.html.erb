@@ -1,4 +1,4 @@
-<h1>Listing Parents</h1>
+<% provide(:panel_title, 'Listing Parents') %>
 
 <table class="table table-condensed table-bordered">
   <thead>
@@ -24,7 +24,7 @@
         <td><%= parent.role %></td>
         <td><%= link_to 'Show', parent %></td>
         <td><%= link_to 'Edit', edit_parent_path(parent) %></td>
-        <td><%= link_to 'Destroy', parent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', parent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

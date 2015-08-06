@@ -1,6 +1,5 @@
 class EnrollmentsController < ApplicationController
   include EnrollmentsHelper
-  layout 'paneled', only: [:new, :edit]
 
   load_and_authorize_resource
 

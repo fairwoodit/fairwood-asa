@@ -12,7 +12,9 @@
     <% end %>
     <th>Paid</th>
     <th>On Waiting List?</th>
-    <th></th>
+    <% if current_parent.admin? %>
+      <th></th>
+    <% end %>
   </tr>
   </thead>
 
@@ -30,8 +32,10 @@
       <% end %>
       <td><%= friendly_boolean(enrollment.paid) %></td>
       <td><%= friendly_boolean(is_waiting(enrollment)) %></td>
-      <td><%= link_to 'Edit', edit_enrollment_path(enrollment) %>&nbsp;
-        <%= link_to 'Cancel', enrollment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% if current_parent.admin? %>
+        <td><%= link_to 'Edit', edit_enrollment_path(enrollment) %>&nbsp;
+          <%= link_to 'Delete', enrollment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
     </tr>
   <% end %>
   </tbody>

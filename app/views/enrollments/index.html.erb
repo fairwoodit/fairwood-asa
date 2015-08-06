@@ -1,3 +1,3 @@
-<h1>My Enrollments</h1>
+<% provide(:panel_title, 'Enrollments') %>
 
 <%= render partial: 'enrollments_table', locals: {enrollments: @enrollments} %>

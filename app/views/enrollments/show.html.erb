@@ -1,7 +1,4 @@
-<p>
-  <strong>Activity:</strong>
-  <%= @enrollment.activity.name %>
-</p>
+<% provide(:panel_title, "Enrollment for #{@enrollment.activity.name}") %>
 
 <p>
   <strong>Student:</strong>
