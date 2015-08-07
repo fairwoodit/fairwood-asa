@@ -4,6 +4,12 @@ class Parent < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :phone_number, format: { with: /\A\d{3}-\d{3}-\d{4}\Z/,
+                                     message: 'must be of the form xxx-xxx-xxxx' }
+  validates :school, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
   has_many :students
   has_many :enrollments, through: :students
   before_save :update_role_if_nil

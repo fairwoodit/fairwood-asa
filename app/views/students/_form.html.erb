@@ -1,33 +1,7 @@
-<%= form_for(@student) do |f| %>
-  <% if @student.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
-
-      <ul>
-      <% @student.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :grade %><br>
-    <%= f.number_field :grade %>
-  </div>
-  <div class="field">
-    <%= f.label :teacher %><br>
-    <%= f.text_field :teacher %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= bootstrap_form_for(@student, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-6') do |f| %>
+  <%= f.text_field :first_name %>
+  <%= f.text_field :last_name %>
+  <%= f.select :grade, [['K', '0'], [1, '1'], [2, '2'], [3, '3'], [4, '4'], [5, '5'],] %>
+  <%= f.text_field :teacher %>
+  <%= f.submit nil, { class: "btn-primary col-sm-offset-5" } %>
 <% end %>

@@ -1,16 +1,7 @@
-  <div class="field">
-    <%= f.label 'Your first name' %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label 'Your last name' %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_number %><br>
-    <%= f.text_field :phone_number %>
-  </div>
-  <div class="field">
-    <%= f.label :school %><br>
-    <%= f.text_field :school %>
-  </div>
+<%= f.text_field :first_name %>
+<%= f.text_field :last_name %>
+<%= f.telephone_field :phone_number, help: 'xxx-xxx-xxxx form' %>
+<%= f.form_group :school, label: { text: "School" } do %>
+  <%= f.radio_button :school, School::FAIRWOOD, label: School::FAIRWOOD, checked: true, inline: true %>
+  <%= f.radio_button :school, School::LAKEWOOD, label: School::LAKEWOOD, inline: true %>
+<% end %>

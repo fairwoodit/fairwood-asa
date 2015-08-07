@@ -1,25 +1,18 @@
 <% provide(:panel_title, 'Log in') %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+<%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name), layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-6') do |f| %>
+  <%= f.email_field :email, autofocus: true %>
+  <%= f.password_field :password, autocomplete: "off" %>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
 
   <% if devise_mapping.rememberable? -%>
-    <div class="field">
+    <%= f.form_group :remember_me do %>
       <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
+    <% end %>
   <% end -%>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", { class: "btn-primary col-sm-offset-5" } %>
   </div>
 <% end %>
 

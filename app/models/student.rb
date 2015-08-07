@@ -3,6 +3,11 @@ class Student < ActiveRecord::Base
 
   has_many :enrollments
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :teacher, presence: true
+  validates :grade, presence: true
+
   scope :eligible, ->(min_grade, max_grade) {
     min_grade ||= 0
     max_grade ||= 5

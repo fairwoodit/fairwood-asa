@@ -5,7 +5,7 @@ class ActivitiesController < ApplicationController
   # GET /activities.json
   def index
     if current_parent.students.empty?
-      redirect_to students_path
+      redirect_to students_path, alert: 'Please add a student to your account.'
     else
       @activities = current_parent.admin? ? Activity.order(:name).all :
         Activity.order(:name).visible
