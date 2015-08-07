@@ -3,6 +3,12 @@ module EnrollmentsHelper
 
 
   def is_waiting(enrollment)
+    # If the enrollment is not committed (meaning it's low-income and the parent
+    # is not willing to pay the full fee if he doesn't get the spot), the enrollment
+    # is considered to be waiting.
+
+    return true unless enrollment.committed
+
     annotated_enrollments = enrollments_with_rank(enrollment.activity)
     match = annotated_enrollments.select { |e| e.id == enrollment.id}
 
