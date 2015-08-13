@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728194146) do
+ActiveRecord::Schema.define(version: 20150813002526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(version: 20150728194146) do
     t.integer  "student_id"
     t.boolean  "low_income"
     t.boolean  "committed"
-    t.boolean  "paid"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "payment_type", default: "none"
   end
 
   add_index "enrollments", ["activity_id"], name: "index_enrollments_on_activity_id", using: :btree

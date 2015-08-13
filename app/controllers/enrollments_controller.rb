@@ -76,7 +76,7 @@ class EnrollmentsController < ApplicationController
   def update
     respond_to do |format|
       if @enrollment.update(enrollment_params)
-        format.html { redirect_to enrollments_path, notice: 'Enrollment was successfully updated.' }
+        format.html { redirect_to session[:current_activity_path], notice: 'Enrollment was successfully updated.' }
         format.json { render :show, status: :ok, location: @enrollment }
       else
         format.html { render :edit }
@@ -98,7 +98,7 @@ class EnrollmentsController < ApplicationController
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def enrollment_params
-    params.require(:enrollment).permit(:activity_id, :student_id, :low_income, :committed, :paid)
+    params.require(:enrollment).permit(:activity_id, :student_id, :low_income, :committed, :payment_type)
   end
 
   def find_eligible_students

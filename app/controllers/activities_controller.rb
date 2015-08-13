@@ -15,6 +15,7 @@ class ActivitiesController < ApplicationController
   # GET /activities/1
   # GET /activities/1.json
   def show
+    session[:current_activity_path] = activity_path(@activity)
   end
 
   # GET /activities/new

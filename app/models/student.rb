@@ -17,4 +17,8 @@ class Student < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def friendly_grade
+    grade > 0 ? grade.to_s : 'K'
+  end
 end

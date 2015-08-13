@@ -4,13 +4,17 @@
     <th>Activity</th>
     <th>Student</th>
     <% if current_parent.admin? %>
+      <th>Grade</th>
+      <th>Teacher</th>
       <th>Parent</th>
+      <th>Email</th>
+      <th>Phone</th>
     <% end %>
     <th>Low income slot</th>
     <% if current_parent.admin? %>
       <th>Committed</th>
     <% end %>
-    <th>Paid</th>
+    <th>Payment Type</th>
     <th>On Waiting List?</th>
     <% if current_parent.admin? %>
       <th></th>
@@ -19,24 +23,6 @@
   </thead>
 
   <tbody>
-  <% enrollments.each do |enrollment| %>
-    <tr>
-      <td><%= enrollment.activity.name %></td>
-      <td><%= enrollment.student.first_name %></td>
-      <% if current_parent.admin? %>
-        <td><%= enrollment.student.parent.full_name %></td>
-      <% end %>
-      <td><%= friendly_boolean(enrollment.low_income) %></td>
-      <% if current_parent.admin? %>
-        <td><%= friendly_boolean(enrollment.committed) %></td>
-      <% end %>
-      <td><%= friendly_boolean(enrollment.paid) %></td>
-      <td><%= friendly_boolean(is_waiting(enrollment)) %></td>
-      <% if current_parent.admin? %>
-        <td><%= link_to 'Edit', edit_enrollment_path(enrollment) %>&nbsp;
-          <%= link_to 'Delete', enrollment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
-    </tr>
-  <% end %>
+  <%= render partial: 'enrollments/enrollment', collection: enrollments %>
   </tbody>
 </table>

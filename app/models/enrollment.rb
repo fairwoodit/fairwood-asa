@@ -5,6 +5,8 @@ class Enrollment < ActiveRecord::Base
   before_save :fix_committed
 
   scope :lifo, -> { order(id: :desc) }
+  scope :fifo, -> { order(:id) }
+  scope :low_uncommitted, -> { where(low_income: true, committed: false) }
 
   # Rank in committed enrollments for the activity; transient field.
   attr_accessor :rank
