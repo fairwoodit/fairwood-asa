@@ -32,6 +32,8 @@ gem 'devise'
 gem 'cancancan', '~> 1.10'
 gem 'kramdown'
 
+gem 'newrelic_rpm'
+
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
