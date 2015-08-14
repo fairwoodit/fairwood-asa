@@ -18,9 +18,9 @@ class Ability
       can :create, Student
       can [:read, :update, :destroy], Student, parent_id: parent.id
 
-      can [:create, :read, :update, :destroy, :success, :low_income, :waiting_list],
-          Enrollment do |r|
-        r.student.blank? || (r.student.parent == parent)
+      can [:create, :read, :cancel, :do_cancel, :success, :low_income, :waiting_list],
+          Enrollment do |e|
+        e.student.blank? || (e.student.parent == parent)
       end
     end
 

@@ -15,9 +15,9 @@
   and then enroll into activities.
 </p>
 <p>
-  Contact <a href="mailto:marjorie.thibaut@hp.com">Marjorie Thibaut-Walker</a>
+  Contact <%= mail_to(ENV['ASA_EMAIL'], ENV['ASA_ADMIN_NAME']) %>
   of the Afterschool Activities Team for questions about activities.
-  Contact the <a href="mailto:fairwood-techsupport@googlegroups.com">IT</a> team for
+  Contact the <%= mail_to('fairwood-techsupport@googlegroups.com', 'IT') %> team for
   technical issues with the site.
 </p>
 <p>

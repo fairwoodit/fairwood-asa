@@ -30,4 +30,18 @@ class UserMailer < ApplicationMailer
     @user = @enrollment.student.parent
     mail(to: @user.email, subject: 'Your enrollment is pending approval')
   end
+
+  def cancel_email(enrollment)
+    @enrollment = enrollment
+    @activity = enrollment.activity
+    @user = @enrollment.student.parent
+    mail(to: ENV['ASA_EMAIL'], subject: 'Enrollment Cancellation Request')
+  end
+
+  def user_cancel_email(enrollment)
+    @enrollment = enrollment
+    @activity = enrollment.activity
+    @user = @enrollment.student.parent
+    mail(to: @user.email, subject: 'Enrollment Cancellation Request')
+  end
 end

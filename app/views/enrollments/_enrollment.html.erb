@@ -9,15 +9,19 @@
     <td><%= parent.full_name %></td>
     <td><%= parent.email %></td>
     <td><%= parent.phone_number %></td>
-<% end %>
+  <% end %>
   <td><%= friendly_boolean(enrollment.low_income) %></td>
   <% if current_parent.admin? %>
     <td><%= friendly_boolean(enrollment.committed) %></td>
   <% end %>
   <td><%= enrollment.payment_type %></td>
   <td><%= friendly_boolean(is_waiting(enrollment)) %></td>
-  <% if current_parent.admin? %>
-    <td><%= link_to 'Edit', edit_enrollment_path(enrollment) %>&nbsp;
-      <%= link_to 'Delete', enrollment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  <% end %>
+  <td>
+    <% if current_parent.admin? %>
+      <%= link_to 'Edit', edit_enrollment_path(enrollment) %>&nbsp;
+      <%= link_to 'Delete', enrollment, method: :delete, data: { confirm: 'Are you sure you want to delete this enrollment?' } %>
+    <% else %>
+      <%= link_to 'Cancel', enrollment_do_cancel_path(enrollment), method: :post, data: { confirm: 'Are you sure you want to cancel this enrollment?' } %>
+    <% end %>
+  </td>
 </tr>

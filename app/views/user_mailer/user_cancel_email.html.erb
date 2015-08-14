@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+</head>
+<body>
+Dear <%= @user.first_name %>,
+
+<p>
+  We received a cancellation request for the
+  <strong><%= @enrollment.activity.name %></strong> class for
+  <%= @enrollment.student.first_name %>. A member of the Afterschool Activities Team
+  will contact you within two
+  days confirming the cancellation along with information on how you will be reimbursed
+  if you have already submitted payment for this activity.
+</p>
+
+<p>
+  If this cancellation request was made in error, please contact
+  <%= mail_to(ENV['ASA_EMAIL'], ENV['ASA_ADMIN_NAME']) %>
+  of the Afterschool Activities Team immediately.
+</p>
+
+<p>
+  - The Fairwood Explorer Afterschool Activities Team
+</p>
+</body>
+</html>

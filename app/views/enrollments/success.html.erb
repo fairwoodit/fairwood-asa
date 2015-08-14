@@ -15,8 +15,9 @@
 </p>
 <p>
   If you have any questions about activities, please
-  contact the afterschool activities team.<br>
-  Contact the <a href="mailto:fairwood-techsupport@googlegroups.com">IT</a> team for
+  contact <%= mail_to(ENV['ASA_EMAIL'], ENV['ASA_ADMIN_NAME']) %>
+  of the Afterschool Activities Team.<br>
+  Contact the <%= mail_to('fairwood-techsupport@googlegroups.com', 'IT') %> team for
   technical issues with the site.
 </p>
 <%= link_to 'Home', root_path %>

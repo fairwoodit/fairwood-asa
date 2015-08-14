@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get '/enrollments/:id/success' => 'enrollments#success', as: :enrollment_success
   get '/enrollments/:id/pending' => 'enrollments#low_income', as: :enrollment_low_income
   get '/enrollments/:id/waiting_list' => 'enrollments#waiting_list', as: :enrollment_waiting_list
+  post '/enrollments/:id/cancel' => 'enrollments#do_cancel', as: :enrollment_do_cancel
+  get '/enrollments/:id/cancel' => 'enrollments#cancel', as: :enrollment_cancel
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

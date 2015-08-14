@@ -15,4 +15,12 @@ class UserMailerPreview < ActionMailer::Preview
   def welcome_email
     UserMailer.welcome_email(Parent.last)
   end
+
+  def cancel_email
+    UserMailer.cancel_email(Enrollment.last)
+  end
+
+  def user_cancel_email
+    UserMailer.user_cancel_email(Enrollment.last)
+  end
 end

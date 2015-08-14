@@ -95,6 +95,18 @@ class EnrollmentsController < ApplicationController
     end
   end
 
+  def do_cancel
+    respond_to do |format|
+      UserMailer.cancel_email(@enrollment).deliver_later
+      UserMailer.user_cancel_email(@enrollment).deliver_later
+      format.html { redirect_to action: :cancel }
+      format.json { render :show, status: :created, location: @enrollment }
+    end
+  end
+
+  def cancel
+  end
+
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def enrollment_params
