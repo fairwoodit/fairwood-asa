@@ -9,6 +9,7 @@ class Parent < ActiveRecord::Base
   validates :school, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :terms_of_service, acceptance: {message: 'Terms of Service must be accepted to proceed.'}, on: :create
 
   has_many :students
   has_many :enrollments, through: :students

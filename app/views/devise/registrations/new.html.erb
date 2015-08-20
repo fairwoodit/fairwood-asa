@@ -1,13 +1,86 @@
 <% provide(:panel_title, 'Sign up') %>
 
-<%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-6') do |f| %>
+<%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), layout: :horizontal, label_col: 'col-sm-3', control_col: 'col-sm-9') do |f| %>
   <%= f.email_field :email, autofocus: true %>
   <%= f.password_field :password, autocomplete: "off", help: "#{@minimum_password_length} characters minimum" %>
   <%= f.password_field :password_confirmation, autocomplete: "off" %>
 
-  <%= render partial: 'form', locals: {f: f} %>
+  <%= render partial: 'form', locals: { f: f } %>
 
-  <%= f.submit 'Sign up', { class: "btn-primary col-sm-offset-5" } %>
+  <%= f.form_group :terms_of_service do %>
+
+    <div class="well well-sm" style="max-height: 400px; overflow-y: scroll">
+      <h3 style="margin-top: 0px">Terms of Service</h3>
+
+      <p>
+        Signup/Enrollment for Fairwood students opens at the ASA Open House on Wednesday
+        August 26 at 5PM. Signup/Enrollment for Lakewood students opens on Wednesday
+        September 9. Enrollments will remain open until Wednesday September 16.
+      </p>
+
+      <p>
+        For Lakewood Students: parents / tutors are responsible for transporting students
+        to
+        Fairwood School, on time, for each enrolled activity.
+        <strong>No transportation is provided from Lakewood School to Fairwood
+          School.</strong>
+      </p>
+
+      <p>
+        For Fairwood Students: Kindergartners will be picked up by vendors in the
+        classroom.
+        Other grades are expected to go from their classroom to the area where the
+        activity
+        is held after school ends.
+      </p>
+
+      <p>
+        The exact location of each activity will be communicated to parents
+        after the closure of signups (or Wednesday 9/16).
+      </p>
+
+      <p>
+        Each activity has a maximum number of students set by the instructor.
+        <strong>Enrollments are first come, first served.
+        </strong> We will open an activity waiting list
+        when the maximum number is reached. We will inform parents as soon as possible to
+        confirm additional classes if possible.
+      </p>
+
+      <p>
+        An activity might be cancelled (or postponed to the next semester) if we don’t
+        reach
+        a minimum of students per class. We might be able to confirm the class at higher
+        cost.
+        <strong>If an activity is canceled, parents will be refunded. ASA Team will
+          communicate details regarding this as needed.</strong>
+      </p>
+
+      <p>
+        <strong>After the class starts, no refund will be possible for any
+          reason.</strong>
+      </p>
+
+      <p>
+        Aftering enrolling in an activity online, please print the
+        automatic confirmation email you have received and bring it to the Fairwood School
+        office with your payment (cash or
+        check)
+        within 48 hours. Your enrollment is pending until payment is made.
+        <strong>After 48 hours,
+          if no payment was received, the signup will be cancelled and your spot
+          released.</strong>
+      </p>
+
+      <p>
+        Free spots are intended for low-revenue families and are limited to 1 child, per
+        family, per activity. Each request is pending until the eligibility is approved by
+        school administration. Free spots will be confirmed a few days before the activity
+        starting date and only when the minimum of signups is reached.
+      </p>
+    </div>
+    <%= f.check_box :terms_of_service, label: 'I understand and accept the terms of service.' %>
+  <% end %>
+
+  <%= f.submit 'Sign up', { class: "btn-primary col-sm-offset-6" } %>
 <% end %>
-
-<%= render "devise/shared/links" %>
