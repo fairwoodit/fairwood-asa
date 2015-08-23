@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+</head>
+<body>
+
+Dear <%= @user.first_name %>,
+<p>
+  Congratulations! Your payment for <strong><%= @enrollment.activity.name %></strong> has
+  been received and <%= @enrollment.student.first_name %>
+
+  <% if @waiting %>
+    is locked into a slot on the waiting list.
+  <% else %>
+    is confirmed for enrollment in the activity.
+  <% end %>
+</p>
+
+
+<p>
+  If for any reason this activity is cancelled or if you cancel this enrollment before the
+  first day of the activity, you will receive a full refund for your payment.
+  <% if @waiting %>
+    If an enrollment slot does not open up for <%= @enrollment.student.first_name %>, you
+    will receive a full refund of your payment.
+  <% end %>
+
+  <strong>Payments cannot be refunded for enrollment cancellations after the activity's
+    start date.
+  </strong>
+</p>
+
+<p>
+  Thank you, and please send any questions to Marjorie Thibaut-Walker of the Afterschool
+  Activities Team.
+</p>
+
+<p>
+  - The Fairwood Explorer Afterschool Activities Team
+</p>
+</body>
+</html>

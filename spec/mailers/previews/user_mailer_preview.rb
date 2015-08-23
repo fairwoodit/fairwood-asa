@@ -23,4 +23,12 @@ class UserMailerPreview < ActionMailer::Preview
   def user_cancel_email
     UserMailer.user_cancel_email(Enrollment.last)
   end
+
+  def payment_confirmed_enrollment_email
+    UserMailer.payment_confirmed_email(Enrollment.first, false)
+  end
+
+  def payment_confirmed_waiting_email
+    UserMailer.payment_confirmed_email(Enrollment.last, true)
+  end
 end

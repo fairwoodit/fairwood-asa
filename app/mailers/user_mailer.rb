@@ -25,6 +25,14 @@ class UserMailer < ApplicationMailer
          template_name: 'enrolled_email')
   end
 
+  def payment_confirmed_email(enrollment, waiting)
+    @enrollment = enrollment
+    @activity = enrollment.activity
+    @user = @enrollment.student.parent
+    @waiting = waiting
+    mail(to: @user.email, subject: 'Payment confirmed!')
+  end
+
   def low_income_enrollment_email(enrollment)
     @enrollment = enrollment
     @user = @enrollment.student.parent

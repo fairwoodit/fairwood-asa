@@ -75,7 +75,14 @@ class EnrollmentsController < ApplicationController
   # PATCH/PUT /enrollments/1.json
   def update
     respond_to do |format|
+      orig_payment_type = @enrollment.payment_type
       if @enrollment.update(enrollment_params)
+        if params[:enrollment][:payment_type] != 'none' &&
+          params[:enrollment][:payment_type] != orig_payment_type
+          # Send a mail to the user confirming payment
+          UserMailer.payment_confirmed_email(@enrollment, is_waiting(@enrollment))
+        end
+
         format.html { redirect_to session[:current_activity_path], notice: 'Enrollment was successfully updated.' }
         format.json { render :show, status: :ok, location: @enrollment }
       else
