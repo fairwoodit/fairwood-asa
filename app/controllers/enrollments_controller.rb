@@ -77,6 +77,8 @@ class EnrollmentsController < ApplicationController
     respond_to do |format|
       orig_payment_type = @enrollment.payment_type
       if @enrollment.update(enrollment_params)
+        logger.error("SANDMAN GOT HERE with #{original_payment_type} and #{params[:enrollment][:payment_type]}")
+        puts "SANDMAN GOT HERE with #{original_payment_type} and #{params[:enrollment][:payment_type]}"
         if params[:enrollment][:payment_type] != 'none' &&
           params[:enrollment][:payment_type] != orig_payment_type
           # Send a mail to the user confirming payment
