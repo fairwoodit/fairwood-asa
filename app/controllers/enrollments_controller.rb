@@ -78,11 +78,10 @@ class EnrollmentsController < ApplicationController
       orig_payment_type = @enrollment.payment_type
       if @enrollment.update(enrollment_params)
         logger.error("SANDMAN GOT HERE with #{orig_payment_type} and #{params[:enrollment][:payment_type]}")
-        puts "SANDMAN GOT HERE with #{orig_payment_type} and #{params[:enrollment][:payment_type]}"
         if params[:enrollment][:payment_type] != 'none' &&
           params[:enrollment][:payment_type] != orig_payment_type
           # Send a mail to the user confirming payment
-          UserMailer.payment_confirmed_email(@enrollment, is_waiting(@enrollment))
+          UserMailer.payment_confirmed_email(@enrollment, is_waiting(@enrollment)).deliver_later
         end
 
         format.html { redirect_to session[:current_activity_path], notice: 'Enrollment was successfully updated.' }
