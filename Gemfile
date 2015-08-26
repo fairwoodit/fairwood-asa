@@ -30,7 +30,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 gem 'cancancan', '~> 1.10'
+
+# For markdown parsing
 gem 'redcarpet'
+
+# For background jobs
+gem 'sidekiq'
 
 gem 'newrelic_rpm'
 
