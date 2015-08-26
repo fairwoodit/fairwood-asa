@@ -1,4 +1,4 @@
-require 'kramdown'
+require 'redcarpet'
 
 class Activity < ActiveRecord::Base
   has_many :enrollments
@@ -12,6 +12,6 @@ class Activity < ActiveRecord::Base
   end
 
   def description_as_html
-    Kramdown::Document.new(description).to_html.html_safe
+    Redcarpet::Markdown.new(Redcarpet::Render::HTML.new).render(description).html_safe
   end
 end
