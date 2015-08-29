@@ -1,6 +1,7 @@
 class EnrollmentsController < ApplicationController
   include EnrollmentsHelper
 
+  before_filter :authenticate_parent!
   load_and_authorize_resource
 
   # GET /enrollments
