@@ -16,6 +16,10 @@ class Parent < ActiveRecord::Base
   before_save :update_role_if_nil
   after_create :send_welcome_mail
 
+  scope :by_name, -> {
+    order(:last_name, :first_name)
+  }
+
   def update_role_if_nil
     self.role = Role::NORMAL if role.blank?
   end

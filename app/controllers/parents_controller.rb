@@ -6,7 +6,7 @@ class ParentsController < ApplicationController
   # GET /parents.json
   def index
     authorize! :index, nil
-    @parents = Parent.all
+    @parents = Parent.by_name
   end
 
   # GET /parents/1
