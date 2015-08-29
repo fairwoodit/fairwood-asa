@@ -1,28 +1,6 @@
 <% provide(:panel_title, 'Students') %>
 
-<table class="table table-condensed table-bordered">
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Grade</th>
-      <th>Teacher</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @students.each do |student| %>
-      <tr>
-        <td><%= student.first_name %></td>
-        <td><%= student.last_name %></td>
-        <td><%= student.grade %></td>
-        <td><%= student.teacher %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render partial: 'students_table', locals: {students: @students} %>
 
 <br>
 

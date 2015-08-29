@@ -1,7 +1,7 @@
 class Student < ActiveRecord::Base
   belongs_to :parent
 
-  has_many :enrollments
+  has_many :enrollments, dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -12,6 +12,10 @@ class Student < ActiveRecord::Base
     min_grade ||= 0
     max_grade ||= 5
     where('grade >= ? and grade <= ?', min_grade, max_grade)
+  }
+
+  scope :by_name, -> {
+    order(:first_name)
   }
 
   def full_name

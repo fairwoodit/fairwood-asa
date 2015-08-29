@@ -20,5 +20,9 @@
   <%= @parent.role %>
 </p>
 
+<p>
+  <strong>Students:</strong>
+  <%= render partial: 'students/students_table', locals: {students: @parent.students.by_name} %>
+</p>
 <%= link_to 'Edit', edit_parent_path(@parent) %> |
 <%= link_to 'Back', parents_path %>

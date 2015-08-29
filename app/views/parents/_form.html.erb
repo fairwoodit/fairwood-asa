@@ -1,45 +1,13 @@
-<%= form_for(@parent) do |f| %>
-  <% if @parent.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@parent.errors.count, "error") %> prohibited this parent from being saved:</h2>
-
-      <ul>
-      <% @parent.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<%= bootstrap_form_for(@parent, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-6') do |f| %>
+  <%= f.text_field :email %>
+  <%= f.password_field :password, placeholder: "Leave blank if unchanged" %>
+  <%= f.text_field :first_name %>
+  <%= f.text_field :last_name %>
+  <%= f.text_field :phone_number %>
+  <%= f.text_field :school %>
+  <%= f.form_group :role do %>
+    <%= f.radio_button :role, 'normal', label: 'Normal', checked: true, inline: true %>
+    <%= f.radio_button :role, 'admin', label: 'Admin', inline: true %>
   <% end %>
-
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.password_field :password, placeholder: "Leave blank if unchanged" %>
-  </div>
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_number %><br>
-    <%= f.text_field :phone_number %>
-  </div>
-  <div class="field">
-    <%= f.label :school %><br>
-    <%= f.text_field :school %>
-  </div>
-  <div class="field">
-    <%= f.label :role %><br>
-    <%= f.text_field :role %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.submit nil, { class: "btn-primary col-sm-offset-5" } %>
 <% end %>
