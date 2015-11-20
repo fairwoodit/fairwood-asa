@@ -6,12 +6,15 @@ class Activity < ActiveRecord::Base
 
   scope :visible, -> { where(visible: true) }
 
+  before_save :update_html_description
+
   def remaining_seats
     seats_taken = enrollments.where(committed: true).count
     max_seats - seats_taken
   end
 
-  def description_as_html
-    Redcarpet::Markdown.new(Redcarpet::Render::HTML.new).render(description).html_safe
+  def update_html_description
+    self.html_description =
+        Redcarpet::Markdown.new(Redcarpet::Render::HTML.new).render(description)
   end
 end

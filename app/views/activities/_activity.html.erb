@@ -54,7 +54,7 @@
       description</a>
   </div>
   <div style="margin-top: 10px;" id="desc-<%= activity.id %>">
-    <%= activity.description_as_html %>
+    <%= activity.html_description.html_safe %>
   </div>
   <hr>
 </div>
