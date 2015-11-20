@@ -6,7 +6,6 @@ class Parent < ActiveRecord::Base
 
   validates :phone_number, format: { with: /\A\d{3}-\d{3}-\d{4}\Z/,
                                      message: 'must be of the form xxx-xxx-xxxx' }
-  validates :school, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :terms_of_service, acceptance: {message: 'Terms of Service must be accepted to proceed.'}, on: :create
@@ -34,9 +33,5 @@ class Parent < ActiveRecord::Base
 
   def admin?
     role == Role::ADMIN
-  end
-
-  def lakewood?
-    school == School::LAKEWOOD
   end
 end

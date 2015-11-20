@@ -1,7 +1,3 @@
 <%= f.text_field :first_name %>
 <%= f.text_field :last_name %>
 <%= f.text_field :phone_number, help: 'xxx-xxx-xxxx form' %>
-<%= f.form_group :school, label: { text: "School" } do %>
-  <%= f.radio_button :school, School::FAIRWOOD, label: School::FAIRWOOD, checked: true, inline: true %>
-  <%= f.radio_button :school, School::LAKEWOOD, label: School::LAKEWOOD, inline: true %>
-<% end %>

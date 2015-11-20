@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
 
   protected
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :first_name << :last_name << :phone_number << :school << :terms_of_service
-    devise_parameter_sanitizer.for(:account_update) << :first_name << :last_name << :phone_number << :school
+    devise_parameter_sanitizer.for(:sign_up) << :first_name << :last_name << :phone_number << :terms_of_service
+    devise_parameter_sanitizer.for(:account_update) << :first_name << :last_name << :phone_number
   end
 
   # CanCanCan requires a current_user method. Devise gives us a current_parent method

@@ -32,8 +32,9 @@ Dear <%= @user.first_name %>,
 </p>
 
 <p>
-  Thank you, and please send any questions to Marjorie Thibaut-Walker of the Afterschool
-  Activities Team.
+  Thank you, and please send any questions to
+  <%= mail_to(ENV['ASA_EMAIL'], ENV['ASA_ADMIN_NAME']) %>
+  of the Afterschool Activities Team.
 </p>
 
 <p>

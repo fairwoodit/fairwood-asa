@@ -7,7 +7,6 @@ RSpec.describe "parents/edit", type: :view do
       :last_name => "MyString",
       :email => "MyString",
       :phone_number => "MyString",
-      :school => "MyString",
       :role => "MyString"
     ))
   end
@@ -24,8 +23,6 @@ RSpec.describe "parents/edit", type: :view do
       assert_select "input#parent_email[name=?]", "parent[email]"
 
       assert_select "input#parent_phone_number[name=?]", "parent[phone_number]"
-
-      assert_select "input#parent_school[name=?]", "parent[school]"
 
       assert_select "input#parent_role[name=?]", "parent[role]"
     end

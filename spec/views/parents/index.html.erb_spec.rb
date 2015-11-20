@@ -8,7 +8,6 @@ RSpec.describe "parents/index", type: :view do
         :last_name => "Last Name",
         :email => "Email",
         :phone_number => "Phone Number",
-        :school => "School",
         :role => "Role"
       ),
       Parent.create!(
@@ -16,7 +15,6 @@ RSpec.describe "parents/index", type: :view do
         :last_name => "Last Name",
         :email => "Email",
         :phone_number => "Phone Number",
-        :school => "School",
         :role => "Role"
       )
     ])
