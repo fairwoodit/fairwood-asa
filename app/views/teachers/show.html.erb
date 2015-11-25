@@ -1,0 +1,10 @@
+<% provide(:panel_title, "Teacher: #{@teacher.title} #{@teacher.first_name} #{@teacher.last_name}") %>
+
+
+<p>
+  <strong>Room:</strong>
+  <%= @teacher.room %>
+</p>
+
+<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
+<%= link_to 'Back', teachers_path %>

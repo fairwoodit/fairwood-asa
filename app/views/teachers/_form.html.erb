@@ -1,0 +1,7 @@
+<%= bootstrap_form_for(@teacher, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-6') do |f| %>
+    <%= f.select :title, [['Mr.', 'Mr.'], ['Ms.', 'Ms.'], ['Miss', 'Miss'], ['Mrs.', 'Mrs.']] %>
+    <%= f.text_field :first_name %>
+    <%= f.text_field :last_name %>
+    <%= f.text_field :room %>
+    <%= f.submit nil, { class: "btn-primary col-sm-offset-5" } %>
+<% end %>

@@ -5,7 +5,7 @@ class Student < ActiveRecord::Base
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :teacher, presence: true
+  validates :teacher_name, presence: true
   validates :grade, presence: true
 
   scope :eligible, ->(min_grade, max_grade) {

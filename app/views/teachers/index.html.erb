@@ -1,0 +1,33 @@
+<% provide(:panel_title, 'Listing Teachers') %>
+
+<table class="table table-condensed table-bordered">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Room</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @teachers.each do |teacher| %>
+      <tr>
+        <td><%= teacher.title %></td>
+        <td><%= teacher.first_name %></td>
+        <td><%= teacher.last_name %></td>
+        <td><%= teacher.room %></td>
+        <td>
+          <%= link_to 'Show', teacher %>&nbsp;
+          <%= link_to 'Edit', edit_teacher_path(teacher) %>&nbsp;
+          <%= link_to 'Delete', teacher, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Teacher', new_teacher_path %>

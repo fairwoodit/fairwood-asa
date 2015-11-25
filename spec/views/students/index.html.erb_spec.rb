@@ -8,14 +8,14 @@ RSpec.describe "students/index", type: :view do
         :last_name => "Last Name",
         :parent => nil,
         :grade => 1,
-        :teacher => "Teacher"
+        :teacher_name => "Teacher"
       ),
       Student.create!(
         :first_name => "First Name",
         :last_name => "Last Name",
         :parent => nil,
         :grade => 1,
-        :teacher => "Teacher"
+        :teacher_name => "Teacher"
       )
     ])
   end
