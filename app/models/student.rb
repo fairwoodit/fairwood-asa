@@ -1,11 +1,11 @@
 class Student < ActiveRecord::Base
   belongs_to :parent
+  belongs_to :teacher
 
   has_many :enrollments, dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :teacher_name, presence: true
   validates :grade, presence: true
 
   scope :eligible, ->(min_grade, max_grade) {

@@ -6,5 +6,10 @@
   <%= @teacher.room %>
 </p>
 
+<p>
+  <strong>Students:</strong>
+  <%= render partial: 'students/students_table', locals: {students: @teacher.students.by_name} %>
+</p>
+
 <%= link_to 'Edit', edit_teacher_path(@teacher) %> |
 <%= link_to 'Back', teachers_path %>

@@ -7,7 +7,7 @@ RSpec.describe "students/show", type: :view do
       :last_name => "Last Name",
       :parent => nil,
       :grade => 1,
-      :teacher_name => "Teacher"
+      :teacher => nil
     ))
   end
 

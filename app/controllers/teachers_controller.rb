@@ -62,6 +62,12 @@ class TeachersController < ApplicationController
       format.html { redirect_to teachers_url, notice: 'Teacher was successfully destroyed.' }
       format.json { head :no_content }
     end
+  rescue
+    msg = 'Teacher has students and cannot be deleted. Reassign students to other teachers and then try again.'
+    respond_to do |format|
+      format.html { redirect_to teachers_url, alert: msg }
+      format.json { render json: {msg: msg} }
+    end
   end
 
   private

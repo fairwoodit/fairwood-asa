@@ -2,6 +2,6 @@
   <%= f.text_field :first_name %>
   <%= f.text_field :last_name %>
   <%= f.select :grade, [['K', '0'], [1, '1'], [2, '2'], [3, '3'], [4, '4'], [5, '5'],] %>
-  <%= f.text_field :teacher_name %>
+  <%= f.collection_select :teacher_id, Teacher.by_name, :id, :full_name %>
   <%= f.submit nil, { class: "btn-primary col-sm-offset-5" } %>
 <% end %>
