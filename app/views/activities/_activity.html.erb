@@ -1,6 +1,10 @@
 <div class="activity" data-category="<%= activity.category %>">
   <span style="font-size: 18px; color: blue"><%= activity.name %></span>
-  with <em><%= activity.instructor %></em> for
+  with
+  <a href="#" data-toggle="popover" data-trigger="hover" title="Contact Info"
+     data-content="<%= contact_info(activity) %>" data-html="true">
+    <%= activity.instructor %>
+  </a> for
   <strong><%= money(activity.cost) %></strong>
   <br>
   Grades: <%= grade_range(activity) %>

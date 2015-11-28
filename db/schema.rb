@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126231115) do
+ActiveRecord::Schema.define(version: 20151128015434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20151126231115) do
     t.integer  "max_grade",                                default: 5,   null: false
     t.string   "category"
     t.text     "html_description"
+    t.string   "vendor_email"
+    t.string   "vendor_phone"
   end
 
   create_table "enrollments", force: :cascade do |t|

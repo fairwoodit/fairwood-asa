@@ -17,7 +17,6 @@ Dear <%= @user.first_name %>,
   <% end %>
 </p>
 
-
 <p>
   If for any reason this activity is cancelled or if you cancel this enrollment before the
   first day of the activity, you will receive a full refund for your payment.
@@ -32,7 +31,14 @@ Dear <%= @user.first_name %>,
 </p>
 
 <p>
-  Thank you, and please send any questions to
+  Thank you, and please contact the instructor with any questions:
+</p>
+<p>
+  <%= email_contact_info(@enrollment.activity) %>
+</p>
+
+<p>
+  For general questions about afterschool activities, please contact
   <%= mail_to(ENV['ASA_EMAIL'], ENV['ASA_ADMIN_NAME']) %>
   of the Afterschool Activities Team.
 </p>

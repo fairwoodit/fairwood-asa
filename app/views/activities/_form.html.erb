@@ -1,6 +1,8 @@
 <%= bootstrap_form_for(@activity, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-6') do |f| %>
   <%= f.text_field :name %>
   <%= f.text_field :instructor %>
+  <%= f.text_field :vendor_phone %>
+  <%= f.text_field :vendor_email %>
   <%= f.number_field :cost, min: 0, step: 0.01, prepend: "$", control_col: "col-sm-3" %>
   <%= f.form_group do %>
     <%= f.check_box :cash_only %>

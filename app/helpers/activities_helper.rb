@@ -36,4 +36,16 @@ module ActivitiesHelper
   def category_options(activity_list)
     ['All'].concat(activity_list.map(&:category).select {|c| c.present?}.uniq.sort)
   end
+
+  def contact_info(activity)
+    vendor_email = activity.vendor_email.present? ? mail_to(activity.vendor_email, activity.vendor_email) : 'None'
+    vendor_phone = activity.vendor_phone.present? ? activity.vendor_phone : 'None'
+    "Email: #{CGI.escapeHTML(vendor_email)}<br>Phone: #{vendor_phone}".html_safe
+  end
+
+  def email_contact_info(activity)
+    vendor_email = activity.vendor_email.present? ? mail_to(activity.vendor_email, activity.vendor_email) : 'None'
+    vendor_phone = activity.vendor_phone.present? ? activity.vendor_phone : 'None'
+    "Email: #{vendor_email}<br>Phone: #{vendor_phone}".html_safe
+  end
 end

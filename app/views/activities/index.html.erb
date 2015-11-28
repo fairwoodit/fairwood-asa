@@ -17,6 +17,8 @@ Category: <%= select_tag('category', options_for_select(category_options(@activi
   $(function() {
     $('[data-toggle="tooltip"]').tooltip();
 
+    $('[data-toggle="popover"]').popover();
+
     // Change handler for category.
     $('#category').change(function() {
       var category = $(this).val();
