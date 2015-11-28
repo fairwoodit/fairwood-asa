@@ -1,0 +1,4 @@
+<%= bootstrap_form_for(@season, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-6') do |f| %>
+    <%= f.text_field :name %>
+    <%= f.submit nil, { class: "btn-primary col-sm-offset-5" } %>
+<% end %>

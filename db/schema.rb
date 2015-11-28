@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151128015434) do
+ActiveRecord::Schema.define(version: 20151128155621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,10 @@ ActiveRecord::Schema.define(version: 20151128015434) do
     t.text     "html_description"
     t.string   "vendor_email"
     t.string   "vendor_phone"
+    t.integer  "season_id"
   end
+
+  add_index "activities", ["season_id"], name: "index_activities_on_season_id", using: :btree
 
   create_table "enrollments", force: :cascade do |t|
     t.integer  "activity_id"
@@ -73,6 +76,12 @@ ActiveRecord::Schema.define(version: 20151128015434) do
   add_index "parents", ["email"], name: "index_parents_on_email", unique: true, using: :btree
   add_index "parents", ["reset_password_token"], name: "index_parents_on_reset_password_token", unique: true, using: :btree
 
+  create_table "seasons", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -97,6 +106,7 @@ ActiveRecord::Schema.define(version: 20151128015434) do
 
   add_index "teachers", ["last_name", "first_name"], name: "index_teachers_on_last_name_and_first_name", unique: true, using: :btree
 
+  add_foreign_key "activities", "seasons"
   add_foreign_key "enrollments", "activities"
   add_foreign_key "enrollments", "students"
   add_foreign_key "students", "parents"

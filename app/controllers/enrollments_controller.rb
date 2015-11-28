@@ -7,7 +7,9 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments
   # GET /enrollments.json
   def index
-    @enrollments = current_parent.enrollments.lifo
+    # Break up current and past enrollments into two groups.
+    @current_enrollments, @past_enrollments =
+        current_parent.enrollments.lifo.partition { |e| e.activity.season == Season.last }
   end
 
   # GET /enrollments/1
@@ -98,7 +100,8 @@ class EnrollmentsController < ApplicationController
   def destroy
     @enrollment.destroy
     respond_to do |format|
-      format.html { redirect_to enrollments_url, notice: 'Enrollment was successfully destroyed.' }
+      format.html { redirect_to session[:current_activity_path],
+                                notice: 'Enrollment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

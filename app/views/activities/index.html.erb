@@ -1,8 +1,13 @@
 <% provide(:panel_title, 'Activities') %>
 
-Category: <%= select_tag('category', options_for_select(category_options(@activities))) %>
+Category: <%= select_tag('category',
+                         options_for_select(category_options(@activities_by_season))) %>
 <hr>
-<%= render partial: 'activity', collection: @activities %>
+<% @activities_by_season.each do |season, activities| %>
+  <div class="section-header"><%= season %></div>
+  <%= render partial: 'activity', collection: activities %>
+  <hr>
+<% end %>
 
 <% if current_parent.admin? %>
   <br>
@@ -14,13 +19,13 @@ Category: <%= select_tag('category', options_for_select(category_options(@activi
     $('#desc-' + id).show();
   }
 
-  $(function() {
+  $(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
     $('[data-toggle="popover"]').popover();
 
     // Change handler for category.
-    $('#category').change(function() {
+    $('#category').change(function () {
       var category = $(this).val();
       if (category == "All") {
         $('.activity').show();

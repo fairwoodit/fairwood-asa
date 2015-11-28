@@ -7,8 +7,13 @@ class ActivitiesController < ApplicationController
     if current_parent.students.empty?
       redirect_to students_path, alert: 'Please add a student to your account.'
     else
-      @activities = current_parent.admin? ? Activity.order(:name).all :
-        Activity.order(:name).visible
+      # This is a little tricky. We want to create an array of [season, activity-list]
+      # arrays. For admins, we want this for all seasons, all activities. For normal
+      # users, we want this for just the current season.
+
+      @activities_by_season = current_parent.admin? ?
+          Activity.order(:season_id).reverse_order.order(:name).chunk { |a| a.season.name } :
+          [[Season.last.name, Activity.where(season: Season.last).order(:name).visible]]
     end
   end
 
@@ -70,6 +75,6 @@ class ActivitiesController < ApplicationController
     params.require(:activity).permit(:name, :instructor, :cost, :description,
                                      :start, :end, :times, :min_seats, :max_seats,
                                      :visible, :cash_only, :min_grade, :max_grade,
-                                     :category, :vendor_email, :vendor_phone)
+                                     :category, :vendor_email, :vendor_phone, :season_id)
   end
 end

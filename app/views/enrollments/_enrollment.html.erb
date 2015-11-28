@@ -1,4 +1,7 @@
 <tr>
+  <% if show_season %>
+    <td><%= enrollment.activity.season.name %></td>
+  <% end %>
   <% student = enrollment.student %>
   <% parent = student.parent %>
   <td><%= enrollment.activity.name %></td>
@@ -17,12 +20,14 @@
   <% end %>
   <td><%= enrollment.payment_type %></td>
   <td><%= friendly_boolean(is_waiting(enrollment)) %></td>
-  <td>
-    <% if current_parent.admin? %>
-      <%= link_to 'Edit', edit_enrollment_path(enrollment) %>&nbsp;
-      <%= link_to 'Delete', enrollment, method: :delete, data: { confirm: 'Are you sure you want to delete this enrollment?' } %>
-    <% else %>
-      <%= link_to 'Cancel', enrollment_do_cancel_path(enrollment), method: :post, data: { confirm: 'Are you sure you want to cancel this enrollment?' } %>
-    <% end %>
-  </td>
+  <% unless show_season %>
+    <td>
+      <% if current_parent.admin? %>
+        <%= link_to 'Edit', edit_enrollment_path(enrollment) %>&nbsp;
+        <%= link_to 'Delete', enrollment, method: :delete, data: { confirm: 'Are you sure you want to delete this enrollment?' } %>
+      <% else %>
+        <%= link_to 'Cancel', enrollment_do_cancel_path(enrollment), method: :post, data: { confirm: 'Are you sure you want to cancel this enrollment?' } %>
+      <% end %>
+    </td>
+  <% end %>
 </tr>

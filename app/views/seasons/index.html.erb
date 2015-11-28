@@ -1,0 +1,23 @@
+<% provide(:panel_title, 'Listing Seasons') %>
+
+<table class="table table-condensed table-bordered">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @seasons.each do |season| %>
+    <tr>
+      <td><%= season.name %></td>
+      <td><%= link_to 'Edit', edit_season_path(season) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Season', new_season_path %>

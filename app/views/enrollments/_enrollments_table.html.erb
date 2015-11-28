@@ -1,6 +1,9 @@
 <table class="table table-condensed table-bordered">
   <thead>
   <tr>
+    <% if show_season %>
+      <th>Season</th>
+    <% end %>
     <th>Activity</th>
     <th>Student</th>
     <% if current_parent.admin? %>
@@ -17,11 +20,13 @@
     <% end %>
     <th>Payment Type</th>
     <th>On Waiting List?</th>
-    <th></th>
+    <% unless show_season %>
+      <th></th>
+    <% end %>
   </tr>
   </thead>
 
   <tbody>
-  <%= render partial: 'enrollments/enrollment', collection: enrollments %>
+  <%= render partial: 'enrollments/enrollment', collection: enrollments, locals: { show_season: show_season } %>
   </tbody>
 </table>

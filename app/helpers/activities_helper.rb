@@ -33,7 +33,8 @@ module ActivitiesHelper
     eligible_students.nil? ? 0 : (eligible_students - activity.students).compact.length
   end
 
-  def category_options(activity_list)
+  def category_options(activities_by_season)
+    activity_list = activities_by_season.map { |season, activities| activities}.flatten
     ['All'].concat(activity_list.map(&:category).select {|c| c.present?}.uniq.sort)
   end
 

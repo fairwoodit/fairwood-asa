@@ -1,6 +1,11 @@
 <% provide(:panel_title, "Activity: #{@activity.name}") %>
 
 <p>
+  <strong>Season:</strong>
+  <%= @activity.season.name %>
+</p>
+
+<p>
   <strong>Instructor:</strong>
   <%= @activity.instructor %>
 </p>
@@ -75,8 +80,10 @@
   <% num_enrolled = [@activity.enrollments.count, @activity.max_seats].min %>
   <% num_low_uncommitted = @activity.enrollments.low_uncommitted.count %>
   <% num_waiting = @activity.remaining_seats < 0 ? -@activity.remaining_seats : 0 %>
-  <%= num_enrolled %> enrolled, <%= num_low_uncommitted %> low-income pending approval, <%= num_waiting %> waiting
-  <%= render partial: 'enrollments/enrollments_table', locals: {enrollments: @activity.enrollments.fifo} %>
+  <%= num_enrolled %> enrolled, <%= num_low_uncommitted %> low-income pending
+  approval, <%= num_waiting %> waiting
+  <%= render partial: 'enrollments/enrollments_table',
+             locals:  { enrollments: @activity.enrollments.fifo, show_season: false } %>
 </p>
 <%= link_to 'Edit', edit_activity_path(@activity) %> |
 <%= link_to 'Back', activities_path %>

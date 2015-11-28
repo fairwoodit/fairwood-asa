@@ -1,4 +1,5 @@
 <%= bootstrap_form_for(@activity, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-6') do |f| %>
+  <%= f.collection_select :season_id, Season.order(:id).reverse_order, :id, :name %>
   <%= f.text_field :name %>
   <%= f.text_field :instructor %>
   <%= f.text_field :vendor_phone %>

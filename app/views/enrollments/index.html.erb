@@ -1,3 +1,7 @@
 <% provide(:panel_title, 'Enrollments') %>
 
-<%= render partial: 'enrollments_table', locals: {enrollments: @enrollments} %>
+<div class="section-header">Current enrollments</div>
+<%= render partial: 'enrollments_table', locals: {enrollments: @current_enrollments, show_season: false} %>
+
+<div class="section-header">Past enrollments</div>
+<%= render partial: 'enrollments_table', locals: {enrollments: @past_enrollments, show_season: true} %>
