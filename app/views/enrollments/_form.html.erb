@@ -12,7 +12,7 @@
                       label: 'If I do not get a low-income slot, I am still interested in registering for this activity.' %>
     </div>
     <% if current_parent.admin? %>
-      <%= f.select :payment_type, [['None', 'none'], ['Check', 'check'], ['Cash', 'cash']] %>
+      <%= f.select :payment_type, [['None', 'none'], ['Check', 'check'], ['Cash', 'cash'], ['To Vendor', 'to_vendor']] %>
     <% end %>
   <% end %>
   <%= f.submit((@waiting ? 'Add to waiting list': 'Enroll!'), { class: "btn-primary col-sm-offset-5" }) %>
