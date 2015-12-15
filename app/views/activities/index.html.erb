@@ -2,6 +2,16 @@
 
 Category: <%= select_tag('category',
                          options_for_select(category_options(@activities_by_season))) %>
+<span style="
+padding-left: 20px;
+">
+  <a href="#"
+     data-toggle="popover" data-trigger="focus"
+     data-content="If you can't find an activity in this list, it means the vendor is handling enrollment. Please contact them directly using the link in the Afterschool Activities Spring 2016 document in the Downloads menu."
+     data-html="true">
+    Can't find what you're looking for?
+  </a>
+</span>
 <hr>
 <% @activities_by_season.each do |season, activities| %>
   <div class="section-header"><%= season %></div>
