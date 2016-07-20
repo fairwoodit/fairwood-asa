@@ -3,10 +3,14 @@ class Student < ActiveRecord::Base
   belongs_to :teacher
 
   has_many :enrollments, dependent: :destroy
+  has_many :walkathon_pledges, -> {order "walkathon_pledges.id" }, class_name: 'Walkathon::Pledge'
 
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :grade, presence: true
+  validates :full_name, uniqueness: true
+
+  before_validation :update_full_name
 
   scope :eligible, ->(min_grade, max_grade) {
     min_grade ||= 0
@@ -18,8 +22,8 @@ class Student < ActiveRecord::Base
     order(:first_name)
   }
 
-  def full_name
-    "#{first_name} #{last_name}"
+  def update_full_name
+    self.full_name = "#{self.first_name} #{self.last_name}"
   end
 
   def friendly_grade

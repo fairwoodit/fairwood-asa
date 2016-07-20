@@ -1,0 +1,27 @@
+<% content_for :nav_left do %>
+    <li>
+      <%= link_to 'Back to Apps', root_path %>
+    </li>
+    <% if current_parent %>
+    <li class="<%= active_class(student_pledges_path) %>">
+      <%= link_to 'Pledges', student_pledges_path %>
+    </li>
+    <% end %>
+    <% if current_parent && current_parent.walkathon? %>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administration
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'Pledge Summaries', pledge_summary_path %></li>
+            <li><%= link_to 'Pledges', walkathon_admin_pledges_path %></li>
+            <li><%= link_to 'Payments', walkathon_payments_path %></li>
+          </ul>
+        </li>
+    <% end %>
+<% end %>
+
+<% content_for :body do %>
+    <%= yield %>
+<% end %>
+
+<%= render template: "layouts/base", locals: {page_title: 'Fairwood Walkathon', page_path: walkathon_path} %>

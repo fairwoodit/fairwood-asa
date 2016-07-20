@@ -1,0 +1,55 @@
+// Place all the styles related to the Walkathon::Pledges controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.ui-autocomplete-loading {
+  background: white image-url("loading-small.gif") right center no-repeat;
+}
+
+.control-label {
+  color: teal;
+}
+
+a:visited {
+  color: #428bca;
+}
+
+div.new-pledge {
+  h2 {
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 140%;
+    font-weight: bold;
+    font-style: normal;
+    text-transform: none;
+    margin-top: 10px;
+  }
+  p {
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
+    font-size: 100%;
+    font-weight: normal;
+    font-style: normal;
+    text-transform: none;
+  }
+}
+
+div.record-laps {
+  width: 800px;
+  background-color: white;
+  margin: 20px auto auto auto;
+  padding: 10px;
+  border-radius: 10px;
+
+  h2 {
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 140%;
+    font-style: normal;
+    text-transform: none;
+    margin-top: 10px;
+  }
+}
+
+td.warn {
+  color: red
+}

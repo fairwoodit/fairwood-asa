@@ -1,0 +1,28 @@
+<% content_for :nav_left do %>
+    <li class="<%= active_class(students_path) %>">
+      <%= link_to 'Students', students_path %>
+    </li>
+    <li class="<%= active_class(activities_path) %>">
+      <%= link_to 'Activities', activities_path %>
+    </li>
+    <li class="<%= active_class(walkathon_path) %>">
+      <%= link_to 'Walkathon', walkathon_path %>
+    </li>
+
+    <% if current_parent && current_parent.admin? %>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administration
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'Parents', parents_path %></li>
+            <li><%= link_to 'Teachers', teachers_path %></li>
+          </ul>
+        </li>
+    <% end %>
+<% end %>
+
+<% content_for :body do %>
+    <%= render partial: 'layouts/paneled' %>
+<% end %>
+
+<%= render template: "layouts/base", locals: {page_title: 'Fairwood Apps', page_path: root_path} %>

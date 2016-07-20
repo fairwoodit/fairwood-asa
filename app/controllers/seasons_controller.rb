@@ -1,6 +1,8 @@
 class SeasonsController < ApplicationController
   before_action :set_season, only: [:show, :edit, :update, :destroy]
 
+  layout 'asa'
+
   # GET /seasons
   # GET /seasons.json
   def index

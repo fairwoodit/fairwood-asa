@@ -2,6 +2,8 @@ class ParentsController < ApplicationController
   before_filter :authenticate_parent!
   load_and_authorize_resource
 
+  layout 'home'
+
   # GET /parents
   # GET /parents.json
   def index

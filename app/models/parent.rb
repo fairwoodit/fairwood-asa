@@ -31,7 +31,15 @@ class Parent < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def asa?
+    role && role.include?(Role::ASA) || admin?
+  end
+
+  def walkathon?
+    role && role.include?(Role::WALKATHON) || admin?
+  end
+
   def admin?
-    role == Role::ADMIN
+    role && role.include?(Role::ADMIN)
   end
 end

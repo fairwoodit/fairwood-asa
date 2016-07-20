@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+</head>
+<body>
+<h2>Here is the updated pledge list for <%= @student.first_name %></h2>
+
+<table cellspacing="0" cellpadding="10" border="0">
+  <thead>
+  <tr>
+    <th style="border-bottom:solid 2px; border-top: solid 2px; border-left: solid 2px; border-top-left-radius: 5px">Sponsor name</th>
+    <% ['Sponsor phone', 'Sponsor email', 'Pledge per lap', 'Maximum pledge'].each do |header| %>
+        <th style="border-bottom: solid 2px; border-top: solid 2px"><%= header %></th>
+    <% end %>
+    <th style="border-bottom:solid 2px; border-top: solid 2px; border-right: solid 2px; border-top-right-radius: 5px">Fixed pledge</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @pledges.each do |walkathon_pledge| %>
+      <tr>
+        <td style="border-left: solid 1px; border-bottom: solid 1px"><%= walkathon_pledge.sponsor_name %></td>
+        <td align="center" style="border-bottom: solid 1px"><%= walkathon_pledge.sponsor_phone %></td>
+        <td align="center" style="border-bottom: solid 1px"><%= walkathon_pledge.sponsor_email %></td>
+        <td align="center" style="border-bottom: solid 1px"><%= money(walkathon_pledge.pledge_per_lap) %></td>
+        <td align="center" style="border-bottom: solid 1px"><%= money(walkathon_pledge.maximum_pledge) %></td>
+        <td align="center" style="border-right: solid 1px; border-bottom: solid 1px"><%= money(walkathon_pledge.fixed_pledge) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<div style="width: 600px; background-color: lightskyblue; margin-left: auto; margin-right: auto; padding: 10px; border-radius: 10px">
+  <%= bootstrap_form_for(@walkathon_pledge, layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-6") do |f| %>
+      <%= f.text_field :student_name %>
+      <%= f.text_field :sponsor_name %>
+      <%= f.phone_field :sponsor_phone, help: "in xxx-xxx-xxxx form", control_col: "col-sm-4" %>
+      <%= f.email_field :sponsor_email %>
+      <%= f.form_group :pledge_type, label: { text: "Choose your pledge type" }, control_col: "col-sm-6" do %>
+          <%= f.radio_button :pledge_type, "perLap", label: "Per Lap", inline: true %> 
+           <%= f.radio_button :pledge_type, "fixed", label: "Fixed Amount", inline: true %>
+      <% end %>
+      <div id="perLapContainer">
+          <%= f.text_field :pledge_per_lap, prepend: "$", control_col: "col-sm-3" %>
+          <%= f.text_field :maximum_pledge, prepend: "$", control_col: "col-sm-3" %>
+      </div>
+      <div id="fixedPledgeContainer">
+        <%= f.text_field :fixed_pledge, prepend: "$", control_col: "col-sm-3" %>
+      </div>
+      <%= f.submit nil, {class: "btn-primary col-md-offset-5"} %>
+  <% end %>
+</div>
+<script>
+    function showHidePledgeGroups(r) {
+        if (r.val() == "fixed") {
+            $("#perLapContainer").hide();
+            $("#fixedPledgeContainer").show();
+        } else {
+            $("#perLapContainer").show();
+            $("#fixedPledgeContainer").hide();
+        }
+    }
+    $(function () {
+        $("input:radio").change(function () {
+            // TODO: Figure out a way to consolidate this with the showHidePledgeGroups function.
+            if (this.value == "fixed") {
+                $("#perLapContainer").hide();
+                $("#fixedPledgeContainer").show();
+            } else {
+                $("#perLapContainer").show();
+                $("#fixedPledgeContainer").hide();
+            }
+        });
+        $("#walkathon_pledge_student_name").autocomplete({
+            source: "<%= student_search_path %>",
+            minLength: 2
+        });
+        checkedRadio = $('input:radio:checked');
+        if (checkedRadio.val() == undefined) {
+            r = $('input:radio[value="perLap"]');
+            r.click();
+            showHidePledgeGroups(r);
+        } else {
+            showHidePledgeGroups(checkedRadio);
+        }
+    });
+</script>

@@ -1,0 +1,5 @@
+<%= bootstrap_form_for(@walkathon_payment, layout: :horizontal, url: walkathon_pledge_payments_path) do |f| %>
+    <%= f.text_field :description, value: 'Check' %>
+    <%= f.text_field :amount, prepend: "$", value: "%.2f" % (@walkathon_pledge.committed_amount - @walkathon_pledge.paid_amount.to_f) %>
+    <%= f.submit nil, { class: "btn-primary col-md-offset-5" } %>
+<% end %>

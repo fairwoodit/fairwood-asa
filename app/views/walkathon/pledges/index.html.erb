@@ -1,0 +1,63 @@
+<div class="mycontainer">
+
+  <h1>Walkathon Pledges
+    <% if @student %>
+    for <%= @student.full_name %>
+    <% end %>
+  </h1>
+
+  <table class="table table-condensed table-bordered">
+    <thead>
+    <tr>
+      <% unless @student %>
+      <th class="col-sm-3">Student name</th>
+      <th>Grade</th>
+      <th class="col-sm-3">Teacher</th>
+      <% end %>
+      <th class="col-sm-3">Sponsor name</th>
+      <th class="col-sm-3">Sponsor phone</th>
+      <th class="col-sm-3">Sponsor email</th>
+      <th>Pledge Details</th>
+      <th>Lap count</th>
+      <th>Committed amount</th>
+      <th>Paid amount</th>
+      <% unless @student %>
+      <th></th>
+      <% end %>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @walkathon_pledges.each do |walkathon_pledge| %>
+        <tr>
+          <% unless @student %>
+          <td><%= walkathon_pledge.student.full_name %></td>
+          <td><%= walkathon_pledge.student.grade %></td>
+          <td><%= walkathon_pledge.student.teacher.full_name %></td>
+          <% end %>
+          <td><%= walkathon_pledge.sponsor_name %></td>
+          <td><%= walkathon_pledge.sponsor_phone %></td>
+          <td><%= walkathon_pledge.sponsor_email %></td>
+          <td><%=
+            walkathon_pledge.fixed? ?
+                money(walkathon_pledge.fixed_pledge) :
+                "#{money(walkathon_pledge.pledge_per_lap)} / #{money(walkathon_pledge.maximum_pledge)}"
+          %></td>
+          <td><%= walkathon_pledge.lap_count %></td>
+          <td><%= money(walkathon_pledge.committed_amount) %></td>
+          <% if walkathon_pledge.paid_amount && walkathon_pledge.paid_amount != 0 %>
+            <td><%= money(walkathon_pledge.paid_amount) %></td>
+          <% else %>
+            <td class="warn">$0.00</td>
+          <% end %>
+          <% unless @student %>
+          <td><%= link_to 'Add Payment', new_walkathon_pledge_payment_path(pledge_id: walkathon_pledge.id) %></td>
+          <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <% unless @student %>
+  <%= link_to 'Download CSV', walkathon_pledges_path(format: :csv) %>
+  <% end %>
+</div>

@@ -13,6 +13,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
+gem 'jquery-ui-rails'
+
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
 
@@ -56,4 +58,4 @@ group :production do
   gem 'puma'
 end
 
-ruby '2.2.2'
+ruby '2.3.0'

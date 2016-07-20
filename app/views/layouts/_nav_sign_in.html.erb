@@ -1,0 +1,15 @@
+<ul class="nav navbar-nav navbar-right">
+  <% if parent_signed_in? %>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_parent.email %>
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><%= link_to "Edit profile", edit_parent_registration_path %></li>
+          <li><%= link_to "Log out", destroy_parent_session_path, :method => :delete %></li>
+        </ul>
+      </li>
+  <% else %>
+      <li><%= link_to "Sign up", new_parent_registration_path %></li>
+      <li><%= link_to "Log in", new_parent_session_path %></li>
+  <% end %>
+</ul>

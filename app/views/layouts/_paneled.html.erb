@@ -1,0 +1,9 @@
+<div class="panel panel-default">
+  <%= panel_title_div(yield(:panel_title)) %>
+  <div class="panel-body">
+    <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, id: "flash_#{name}" %>
+    <% end %>
+    <%= yield %>
+  </div>
+</div>
