@@ -10,7 +10,7 @@ class Parent < ActiveRecord::Base
   validates :last_name, presence: true
   validates :terms_of_service, acceptance: {message: 'Terms of Service must be accepted to proceed.'}, on: :create
 
-  has_many :students
+  has_many :students, dependent: :destroy
   has_many :enrollments, through: :students
   before_save :update_role_if_nil
   after_create :send_welcome_mail

@@ -3,7 +3,7 @@ class Student < ActiveRecord::Base
   belongs_to :teacher
 
   has_many :enrollments, dependent: :destroy
-  has_many :walkathon_pledges, -> {order "walkathon_pledges.id" }, class_name: 'Walkathon::Pledge'
+  has_many :walkathon_pledges, -> {order "walkathon_pledges.id" }, class_name: 'Walkathon::Pledge', dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true
