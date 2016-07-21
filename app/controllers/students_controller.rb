@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
-  before_filter :authenticate_parent!
+  before_filter :authenticate_parent!, except: [:search]
   load_and_authorize_resource
+  skip_authorize_resource :only => :search
 
   layout 'home'
 
