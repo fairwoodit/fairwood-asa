@@ -1,4 +1,6 @@
 class Walkathon::PaymentsController < ApplicationController
+  before_filter :authenticate_parent!
+
   before_action :set_walkathon_payment, only: [:show, :edit, :update, :destroy]
   before_action :set_walkathon_pledge, only: [:new, :create, :destroy]
 
@@ -7,6 +9,7 @@ class Walkathon::PaymentsController < ApplicationController
   # GET /walkathon/payments
   # GET /walkathon/payments.json
   def index
+    authorize! :index, Walkathon::Pledge.new
     @pledge = Walkathon::Pledge.find(params[:pledge_id]) if params[:pledge_id]
     @walkathon_payments = params[:pledge_id] ? Walkathon::Payment.for_pledge(params[:pledge_id]) : Walkathon::Payment.all
   end
@@ -14,15 +17,18 @@ class Walkathon::PaymentsController < ApplicationController
   # GET /walkathon/payments/1
   # GET /walkathon/payments/1.json
   def show
+    authorize! :show, @walkathon_payment
   end
 
   # GET /walkathon/payments/new
   def new
     @walkathon_payment = Walkathon::Payment.new
+    authorize! :new, @walkathon_payment
   end
 
   # GET /walkathon/payments/1/edit
   def edit
+    authorize! :edit, @walkathon_payment
   end
 
   # POST /walkathon/payments
@@ -31,6 +37,8 @@ class Walkathon::PaymentsController < ApplicationController
     @walkathon_payment = Walkathon::Payment.new(walkathon_payment_params)
 
     payment_saved = false
+
+    authorize! :create, @walkathon_payment
 
     Walkathon::Payment.transaction do
       @walkathon_payment.walkathon_pledge = @walkathon_pledge
@@ -57,6 +65,8 @@ class Walkathon::PaymentsController < ApplicationController
   def update
     # TODO: Fix this if we want to support editing payments.
     raise 'The update action is not implemented correctly'
+
+    authorize! :update, @walkathon_payment
     respond_to do |format|
       if @walkathon_payment.update(walkathon_payment_params)
         format.html { redirect_to @walkathon_payment, notice: 'Payment was successfully updated.' }
@@ -71,8 +81,9 @@ class Walkathon::PaymentsController < ApplicationController
   # DELETE /walkathon/payments/1
   # DELETE /walkathon/payments/1.json
   def destroy
+    authorize! :destroy, @walkathon_payment
     Walkathon::Payment.transaction do
-      @walkathon_pledge.paid_amount -= @walkathon_payment.amount
+      @walkathon_pledge.paid_amount -= (@walkathon_payment.amount || 0)
       payment_destroyed = @walkathon_payment.destroy
       raise ActiveRecord::Rollback unless payment_destroyed
       @walkathon_pledge.save!

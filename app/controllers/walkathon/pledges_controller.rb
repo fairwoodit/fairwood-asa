@@ -1,11 +1,14 @@
 class Walkathon::PledgesController < ApplicationController
-  before_action :set_walkathon_pledge, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_parent!, only: [:index, :for_current, :show, :edit, :summary, :update, :destroy]
+
+  load_and_authorize_resource only: [:index, :show, :edit, :update, :destroy]
 
   layout 'walkathon'
 
   # GET /walkathon/pledges
   # GET /walkathon/pledges.json
   def index
+    authorize! :index, Walkathon::Pledge.new
     @walkathon_pledges = Walkathon::Pledge.includes(:student)
     if params[:student_id]
       @walkathon_pledges = @walkathon_pledges.where(student_id: params[:student_id])
@@ -126,6 +129,7 @@ class Walkathon::PledgesController < ApplicationController
   end
 
   def summary
+    authorize! :summary, Walkathon::Pledge.new
     @pledge_summaries = Walkathon::Pledge.joins(student: [:parent, :teacher]).select(
         'students.full_name, parents.email, students.grade, ' +
             'concat(teachers.title, \' \', teachers.last_name) AS teacher_name, ' +

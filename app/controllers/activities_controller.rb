@@ -1,7 +1,7 @@
 class ActivitiesController < ApplicationController
   before_filter :authenticate_parent!
 
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:index]
   layout 'asa'
 
   # GET /activities
