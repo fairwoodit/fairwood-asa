@@ -1,0 +1,7 @@
+<%- headers = ['Student Name', 'Parent Emails', 'Grade', 'Teacher', 'Lap Count', 'Total Committed Amount ($)',
+               'Total Paid Amount ($)', 'Outstanding Balance ($)'] -%>
+<%= CSV.generate_line(headers).html_safe %>
+<%- @pledge_summaries.each do |summary| -%>
+    <%= CSV.generate_line([summary.full_name, summary.email, summary.grade, summary.teacher_name, summary.lap_count,
+                           summary.total_committed_amount, summary.total_paid_amount, summary.remaining]).html_safe %>
+<%- end -%>

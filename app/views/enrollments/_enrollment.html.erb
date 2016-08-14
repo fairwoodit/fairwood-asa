@@ -6,7 +6,7 @@
   <% parent = student.parent %>
   <td><%= enrollment.activity.name %></td>
   <td><%= enrollment.student.full_name %></td>
-  <% if current_parent.admin? %>
+  <% if current_parent.asa? %>
     <td><%= student.friendly_grade %></td>
     <td><%= student.teacher.full_name %></td>
     <td><%= student.teacher.room %></td>
@@ -15,14 +15,14 @@
     <td><%= parent.phone_number %></td>
   <% end %>
   <td><%= friendly_boolean(enrollment.low_income) %></td>
-  <% if current_parent.admin? %>
+  <% if current_parent.asa? %>
     <td><%= friendly_boolean(enrollment.committed) %></td>
   <% end %>
   <td><%= enrollment.payment_type %></td>
   <td><%= friendly_boolean(is_waiting(enrollment)) %></td>
   <% unless show_season %>
     <td>
-      <% if current_parent.admin? %>
+      <% if current_parent.asa? %>
         <%= link_to 'Edit', edit_enrollment_path(enrollment) %>&nbsp;
         <%= link_to 'Delete', enrollment, method: :delete, data: { confirm: 'Are you sure you want to delete this enrollment?' } %>
       <% else %>

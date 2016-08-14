@@ -2,11 +2,9 @@ class UserMailer < ApplicationMailer
   helper ActivitiesHelper
   helper ApplicationHelper
 
-  default from: 'fairwoodit@gmail.com'
-
   def welcome_email(user)
     @user = user
-    mail(to: @user.email, subject: 'Welcome to Fairwood Explorer Afterschool Activities')
+    mail(to: @user.email, subject: 'Welcome to the Fairwood Explorer Portal')
   end
 
   def enrolled_email(enrollment)
@@ -51,5 +49,13 @@ class UserMailer < ApplicationMailer
     @activity = enrollment.activity
     @user = @enrollment.student.parent
     mail(to: @user.email, subject: 'Enrollment Cancellation Request')
+  end
+
+  # @param [Student] student
+  def new_pledge_email(student)
+    @student = student
+    @pledges = student.walkathon_pledges
+    parent_email = student.parent.email
+    mail(to: parent_email, subject: "#{student.first_name} has a new pledge!")
   end
 end

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sponsor name:</strong>
+  <%= @walkathon_pledge.sponsor_name %>
+</p>
+
+<p>
+  <strong>Sponsor phone:</strong>
+  <%= @walkathon_pledge.sponsor_phone %>
+</p>
+
+<p>
+  <strong>Pledge per lap:</strong>
+  <%= @walkathon_pledge.pledge_per_lap %>
+</p>
+
+<p>
+  <strong>Maximum pledge:</strong>
+  <%= @walkathon_pledge.maximum_pledge %>
+</p>
+
+<p>
+  <strong>Fixed pledge:</strong>
+  <%= @walkathon_pledge.fixed_pledge %>
+</p>
+
+<%= link_to 'Edit', edit_walkathon_pledge_path(@walkathon_pledge) %> |
+<%= link_to 'Back', walkathon_pledges_path %>

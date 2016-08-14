@@ -19,12 +19,31 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  authenticated :parent do
-    root :to => 'activities#index', as: :authenticated_root
-  end
+  # authenticated :parent do
+  #   root :to => 'activities#index', as: :authenticated_root
+  # end
   root :to => 'welcome#index'
 
-  get '/welcome' => 'welcome#index', as: :welcome
+  ##### Walkathon Paths #####
+
+  # Disable student import; need to fix impl before enabling.
+#  post 'students/import' => 'students#import', as: :import
+  get 'student_search' => 'students#search', as: :student_search
+
+  namespace :walkathon do
+    resources :pledges, except: [:index] do
+      resources :payments
+    end
+  end
+
+  get 'walkathon' => 'walkathon/pledges#new', as: :walkathon
+  get 'walkathon/payments' => 'walkathon/payments#index', as: :walkathon_payments
+  get 'walkathon/thankyou' => 'walkathon/pledges#thankyou', as: :thankyou
+  post 'walkathon/record_laps' => 'walkathon/pledges#record_laps', as: :record_laps
+  get 'walkathon/record_laps' => 'walkathon/pledges#show_record_laps', as: :show_record_laps
+  get 'walkathon/admin/pledge_summary' => 'walkathon/pledges#summary', as: :pledge_summary
+  get 'walkathon/admin/pledges' => 'walkathon/pledges#index', as: :walkathon_admin_pledges
+  get 'walkathon/pledges' => 'walkathon/pledges#for_current', as: :student_pledges
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

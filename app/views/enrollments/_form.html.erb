@@ -11,7 +11,7 @@
       <%= f.check_box :committed,
                       label: 'If I do not get a low-income slot, I am still interested in registering for this activity.' %>
     </div>
-    <% if current_parent.admin? %>
+    <% if current_parent.asa? %>
       <%= f.select :payment_type, [['None', 'none'], ['Check', 'check'], ['Cash', 'cash'], ['To Vendor', 'to_vendor']] %>
     <% end %>
   <% end %>

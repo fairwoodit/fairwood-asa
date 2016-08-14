@@ -1,5 +1,8 @@
 class ActivitiesController < ApplicationController
-  load_and_authorize_resource
+  before_filter :authenticate_parent!
+
+  load_and_authorize_resource except: [:index]
+  layout 'asa'
 
   # GET /activities
   # GET /activities.json
@@ -11,7 +14,7 @@ class ActivitiesController < ApplicationController
       # arrays. For admins, we want this for all seasons, all activities. For normal
       # users, we want this for just the current season.
 
-      @activities_by_season = current_parent.admin? ?
+      @activities_by_season = current_parent.asa? ?
           Activity.order(:season_id).reverse_order.order(:name).chunk { |a| a.season.name } :
           [[Season.last.name, Activity.where(season: Season.last).order(:name).visible]]
     end

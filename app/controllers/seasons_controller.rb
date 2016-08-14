@@ -1,9 +1,13 @@
 class SeasonsController < ApplicationController
-  before_action :set_season, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_parent!
+  load_and_authorize_resource
+
+  layout 'asa'
 
   # GET /seasons
   # GET /seasons.json
   def index
+    authorize! :index, Season.new
     @seasons = Season.all
   end
 

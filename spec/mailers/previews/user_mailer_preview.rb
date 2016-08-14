@@ -31,4 +31,8 @@ class UserMailerPreview < ActionMailer::Preview
   def payment_confirmed_waiting_email
     UserMailer.payment_confirmed_email(Enrollment.last, true)
   end
+
+  def new_pledge_email
+    UserMailer.new_pledge_email(Student.last)
+  end
 end

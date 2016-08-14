@@ -1,0 +1,36 @@
+<div class="record-laps">
+  <h2>Record Laps</h2>
+
+  <div style="width: 400px; background-color: lightskyblue; margin-left: auto; margin-right: auto; padding: 10px; border-radius: 10px">
+    <% if notice %>
+        <p id="notice"><%= notice %></p>
+    <% end %>
+    <% if @errors && @errors.length > 0 %>
+        <div style="color: red">
+          <p>Found some errors and couldn't save this lap info</p>
+          <ul>
+            <% @errors.each do |errmsg| %>
+                <li><%= errmsg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <%= bootstrap_form_tag(layout: :inline) do |f| %>
+        <% (0..9).each do |ind| %>
+            <div style="margin-bottom: 5px">
+              <%= f.text_field "student_name_#{ind}", name: "row[#{ind}][student_name]", class: "student", hide_label: true, placeholder: "Enter student name", control_col: 'col-sm-6', value: @prev_rows && @prev_rows[ind.to_s] ? @prev_rows[ind.to_s]['student_name'] : "" %>
+              <%= f.number_field "lap_count_#{ind}", name: "row[#{ind}][lap_count]", min: "1", hide_label: true, placeholder: "Enter laps run", control_col: 'col-sm-2', value: @prev_rows && @prev_rows[ind.to_s] ? @prev_rows[ind.to_s]['lap_count'] : "" %>
+            </div>
+        <% end %>
+        <%= f.submit nil, { class: "btn-primary col-md-offset-5" } %>
+    <% end %>
+  </div>
+  <script>
+      $(function () {
+          $(".student").autocomplete({
+              source: "<%= student_search_path %>",
+              minLength: 2
+          });
+      });
+  </script>
+</div>

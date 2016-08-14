@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= page_title %></title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="shortcut icon" href="/favicon3.ico" type="image/x-icon"/>
+  <%= csrf_meta_tags %>
+</head>
+<body style="background-color: teal">
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to page_title, page_path, class: 'navbar-brand' %>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <%= yield(:nav_left) %>
+      </ul>
+      <%= render 'layouts/nav_sign_in' %>
+    </div>
+  </div>
+</nav>
+
+<!--
+<p class="notice"><\%= notice %></p>
+<p class="alert"><\%= alert %></p>
+-->
+<div style="width: 1152px; margin: 40px auto 0 auto">
+  <%= yield(:body) %>
+</div>
+</body>
+</html>

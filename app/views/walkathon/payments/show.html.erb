@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @walkathon_payment.description %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @walkathon_payment.amount %>
+</p>
+
+<p>
+  <strong>Walkathon pledge:</strong>
+  <%= @walkathon_payment.walkathon_pledge %>
+</p>
+
+<%= link_to 'Edit', edit_walkathon_pledge_payment_path(@walkathon_payment) %> |
+<%= link_to 'Back', walkathon_payments_path %>

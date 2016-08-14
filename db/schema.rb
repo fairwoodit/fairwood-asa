@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151128155621) do
+ActiveRecord::Schema.define(version: 20160711005739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,8 +90,11 @@ ActiveRecord::Schema.define(version: 20151128155621) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "teacher_id"
+    t.string   "full_name"
   end
 
+  add_index "students", ["full_name"], name: "index_students_on_full_name", using: :btree
+  add_index "students", ["last_name"], name: "index_students_on_last_name", using: :btree
   add_index "students", ["parent_id"], name: "index_students_on_parent_id", using: :btree
   add_index "students", ["teacher_id"], name: "index_students_on_teacher_id", using: :btree
 
@@ -106,9 +109,49 @@ ActiveRecord::Schema.define(version: 20151128155621) do
 
   add_index "teachers", ["last_name", "first_name"], name: "index_teachers_on_last_name_and_first_name", unique: true, using: :btree
 
+  create_table "walkathon_lap_counts", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "lap_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "walkathon_lap_counts", ["student_id"], name: "index_walkathon_lap_counts_on_student_id", unique: true, using: :btree
+
+  create_table "walkathon_payments", force: :cascade do |t|
+    t.string   "description"
+    t.decimal  "amount",              precision: 7, scale: 2
+    t.integer  "walkathon_pledge_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "walkathon_payments", ["walkathon_pledge_id"], name: "index_walkathon_payments_on_walkathon_pledge_id", using: :btree
+
+  create_table "walkathon_pledges", force: :cascade do |t|
+    t.string   "sponsor_name"
+    t.string   "sponsor_phone"
+    t.string   "sponsor_email"
+    t.integer  "lap_count"
+    t.string   "pledge_type"
+    t.decimal  "pledge_per_lap",   precision: 5, scale: 2
+    t.decimal  "maximum_pledge",   precision: 7, scale: 2
+    t.decimal  "fixed_pledge",     precision: 7, scale: 2
+    t.decimal  "committed_amount", precision: 7, scale: 2
+    t.decimal  "paid_amount",      precision: 7, scale: 2
+    t.integer  "student_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "walkathon_pledges", ["student_id"], name: "index_walkathon_pledges_on_student_id", using: :btree
+
   add_foreign_key "activities", "seasons"
   add_foreign_key "enrollments", "activities"
   add_foreign_key "enrollments", "students"
   add_foreign_key "students", "parents"
   add_foreign_key "students", "teachers"
+  add_foreign_key "walkathon_lap_counts", "students"
+  add_foreign_key "walkathon_payments", "walkathon_pledges"
+  add_foreign_key "walkathon_pledges", "students"
 end

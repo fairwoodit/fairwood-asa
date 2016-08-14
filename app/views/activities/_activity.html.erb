@@ -29,7 +29,7 @@
       <%= link_to "Enroll Now!", new_enrollment_path(activity_id: activity.id), class: "btn btn-primary" %>
     <% end %>
   <% end %>
-  <% if current_parent.admin? %>
+  <% if current_parent.asa? %>
     &nbsp;&nbsp;
     <% unless activity.visible %>
       <span class="glyphicon glyphicon-eye-close" style="color:orangered;" title="Not visible in activity list" data-toggle="tooltip"></span>

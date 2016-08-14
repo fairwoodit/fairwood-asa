@@ -1,0 +1,32 @@
+<% content_for :nav_left do %>
+    <li>
+      <%= link_to 'Back to Apps', root_path %>
+    </li>
+    <li class="<%= active_class(enrollments_path) %>">
+      <%= link_to 'Enrollments', enrollments_path %>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Downloads
+        <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><%= link_to 'Spring 2016 Calendar', '/ASA-Cal-Spring2016.pdf' %></li>
+        <li><%= link_to "Afterschool Activities Spring 2016", '/ASA-Program-Spring2016.pdf' %></li>
+      </ul>
+    </li>
+
+    <% if current_parent && current_parent.asa? %>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administration
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'Seasons', seasons_path %></li>
+          </ul>
+        </li>
+    <% end %>
+<% end %>
+
+<% content_for :body do %>
+    <%= render partial: 'layouts/paneled' %>
+<% end %>
+
+<%= render template: "layouts/base", locals: {page_title: 'Fairwood Activities', page_path: activities_path} %>

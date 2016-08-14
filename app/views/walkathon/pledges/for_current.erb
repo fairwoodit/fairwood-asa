@@ -1,0 +1,41 @@
+<div class="mycontainer">
+  <h1>Walkathon Pledges</h1>
+  <% @walkathon_pledges.each do |student_name, pledge_list| %>
+      <h2><%= student_name %></h2>
+      <table class="table table-condensed table-bordered">
+        <thead>
+        <tr>
+          <th class="col-sm-2">Sponsor name</th>
+          <th class="col-sm-2">Sponsor phone</th>
+          <th class="col-sm-3">Sponsor email</th>
+          <th class="col-sm-2">Pledge Details</th>
+          <th class="col-sm-1">Lap count</th>
+          <th class="col-sm-1">Committed amount</th>
+          <th class="col-sm-1">Paid amount</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% pledge_list.each do |walkathon_pledge| %>
+            <tr>
+              <td><%= walkathon_pledge.sponsor_name %></td>
+              <td><%= walkathon_pledge.sponsor_phone %></td>
+              <td><%= walkathon_pledge.sponsor_email %></td>
+              <td><%=
+                walkathon_pledge.fixed? ?
+                    money(walkathon_pledge.fixed_pledge) :
+                    "#{money(walkathon_pledge.pledge_per_lap)} per lap, #{money(walkathon_pledge.maximum_pledge)} max"
+              %></td>
+              <td><%= walkathon_pledge.lap_count %></td>
+              <td><%= money(walkathon_pledge.committed_amount) %></td>
+              <% if walkathon_pledge.paid_amount && walkathon_pledge.paid_amount != 0 %>
+                  <td><%= money(walkathon_pledge.paid_amount) %></td>
+              <% else %>
+                  <td class="warn">$0.00</td>
+              <% end %>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% end %>
+</div>

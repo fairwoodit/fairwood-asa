@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Fairwood Activities</title>
+  <title>Fairwood Apps</title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <link rel="shortcut icon" href="/favicon3.ico" type="image/x-icon"/>
@@ -9,87 +9,12 @@
 </head>
 <body style="background-color: teal">
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <%= link_to 'Fairwood Activities', root_path, class: 'navbar-brand' %>
-    </div>
-    <div>
-      <ul class="nav navbar-nav">
-        <li class="<%= active_class(root_path, activities_path) %>">
-          <%= link_to 'Home', root_path %>
-        </li>
-        <li class="<%= active_class(enrollments_path) %>">
-          <%= link_to 'Enrollments', enrollments_path %>
-        </li>
-        <li class="<%= active_class(students_path) %>">
-          <%= link_to 'Students', students_path %>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Downloads
-            <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to 'Spring 2016 Calendar', '/ASA-Cal-Spring2016.pdf' %></li>
-            <li><%= link_to "Afterschool Activities Spring 2016", '/ASA-Program-Spring2016.pdf' %></li>
-          </ul>
-        </li>
-
-        <% if current_parent && current_parent.admin? %>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administration
-                <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><%= link_to 'Parents', parents_path %></li>
-                <li><%= link_to 'Teachers', teachers_path %></li>
-                <li><%= link_to 'Seasons', seasons_path %></li>
-              </ul>
-            </li>
-        <% end %>
-
-        <li class="<%= active_class(welcome_path) %>">
-          <%= link_to 'About', welcome_path %>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <% if parent_signed_in? %>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_parent.email %>
-              <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Edit profile", edit_parent_registration_path %></li>
-              <li><%= link_to "Log out", destroy_parent_session_path, :method => :delete %></li>
-            </ul>
-          </li>
-        <% else %>
-          <li><%= link_to "Sign up", new_parent_registration_path %></li>
-          <li><%= link_to "Log in", new_parent_session_path %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-</nav>
-
 <!--
 <p class="notice"><\%= notice %></p>
 <p class="alert"><\%= alert %></p>
 -->
-
-<div style="width: 1024px; margin: 0 auto 0 auto">
-  <div class="panel panel-default">
-    <%= panel_title_div(yield(:panel_title)) %>
-    <div class="panel-body">
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, id: "flash_#{name}" %>
-      <% end %>
-      <%= yield %>
-    </div>
-  </div>
-
-
-  <!--
-<%= content_for?(:content) ? yield(:content) : yield %>
--->
-
+<div style="width: 1152px; margin: 40px auto 0 auto">
+  <%= render partial: 'layouts/paneled' %>
 </div>
 </body>
 </html>

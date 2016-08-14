@@ -6,13 +6,8 @@ class Ability
     if parent.admin?
       can :manage, :all
     else
-      can :read, Activity do |a|
-        # This is a bit hacky. CanCanCan doesn't distinguish between index and show.
-        # We want 'show' to be an admin-only view, but we want 'index' open to all.
-        # For index, CanCanCan instantiates a dummy activity and passes it here. We
-        # use that to decide which case we're in.
-
-        a.name.blank?
+      can :manage, [Activity, Season] do
+        parent.asa?
       end
 
       can :create, Student
@@ -21,6 +16,18 @@ class Ability
       can [:create, :read, :cancel, :do_cancel, :success, :low_income, :waiting_list],
           Enrollment do |e|
         e.student.blank? || (e.student.parent == parent)
+      end
+
+      can [:edit, :destroy, :update], Enrollment do
+        parent.asa?
+      end
+
+      can [:index, :summary, :show, :edit, :update, :destroy], Walkathon::Pledge do
+        parent.walkathon?
+      end
+
+      can :manage, Walkathon::Payment do
+        parent.walkathon?
       end
     end
 

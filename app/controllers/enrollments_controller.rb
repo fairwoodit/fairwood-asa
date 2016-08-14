@@ -4,6 +4,8 @@ class EnrollmentsController < ApplicationController
   before_filter :authenticate_parent!
   load_and_authorize_resource
 
+  layout 'asa'
+
   # GET /enrollments
   # GET /enrollments.json
   def index
