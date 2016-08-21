@@ -5,9 +5,9 @@ Category: <%= select_tag('category',
 <span style="
 padding-left: 20px;
 ">
-  <a href="#"
+  <a id="no_find" href="#"
      data-toggle="popover" data-trigger="focus"
-     data-content="If you can't find an activity in this list, it means the vendor is handling enrollment. Please contact them directly using the link in the Afterschool Activities Spring 2016 document in the Downloads menu."
+     data-content="If you can't find an activity in this list, it means the vendor is handling enrollment. Please contact them directly using the link in the Afterschool Activities Fall 2016 document in the Downloads menu."
      data-html="true">
     Can't find what you're looking for?
   </a>
@@ -33,6 +33,10 @@ padding-left: 20px;
     $('[data-toggle="tooltip"]').tooltip();
 
     $('[data-toggle="popover"]').popover();
+
+    $('#no_find').on("click", function(e) {
+      e.preventDefault();
+    });
 
     // Change handler for category.
     $('#category').change(function () {

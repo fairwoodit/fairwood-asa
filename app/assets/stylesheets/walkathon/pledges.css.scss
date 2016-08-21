@@ -10,26 +10,41 @@
   color: teal;
 }
 
-a:visited {
-  color: #428bca;
+// Commented out because it messes with the "enroll now" button in ASA. We should scope this if we really want it.
+//a:visited {
+//  color: #428bca;
+//}
+
+@font-face {
+  font-family: "Bangers";
+  src: url(/assets/Bangers.ttf) format("truetype");
 }
 
 div.new-pledge {
+  background-image: url("/assets/pledge_form_background.png");
+  width: 800px;
   h2 {
     text-align: center;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    font-size: 140%;
-    font-weight: bold;
+    font-family: 'Bangers', 'Comic Sans MS', cursive, sans-serif;
+    font-size: 200%;
     font-style: normal;
     text-transform: none;
     margin-top: 10px;
   }
   p {
-    font-family: 'Trebuchet MS', Helvetica, sans-serif;
+    font-family: 'Bangers', 'Trebuchet MS', Helvetica, sans-serif;
     font-size: 100%;
     font-weight: normal;
     font-style: normal;
     text-transform: none;
+  }
+
+  div.pledge_form {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border-radius: 10px;
   }
 }
 
