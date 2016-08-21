@@ -17,11 +17,11 @@
 
 @font-face {
   font-family: "Bangers";
-  src: url(/assets/Bangers.ttf) format("truetype");
+  src: asset-url("Bangers.ttf") format("truetype");
 }
 
 div.new-pledge {
-  background-image: url("/assets/pledge_form_background.png");
+  background-image: image-url("pledge_form_background.png");
   width: 800px;
   h2 {
     text-align: center;
