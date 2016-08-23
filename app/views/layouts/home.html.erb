@@ -19,6 +19,15 @@
           </ul>
         </li>
     <% end %>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Help
+        <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><%= link_to 'Introduction to Fairwood Apps', 'https://drive.google.com/open?id=0B_Y7YaS4GL0BOW5EZ3hiYVhPX0E', target: '_blank' %></li>
+        <li><%= link_to 'Introduction to Walkathon', 'https://drive.google.com/open?id=0B_Y7YaS4GL0BZDdzcmw2TWVhT2s', target: '_blank' %></li>
+      </ul>
+    </li>
+
 <% end %>
 
 <% content_for :body do %>
