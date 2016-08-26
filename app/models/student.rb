@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class Student < ActiveRecord::Base
   belongs_to :parent
   belongs_to :teacher
@@ -9,8 +11,10 @@ class Student < ActiveRecord::Base
   validates :last_name, presence: true
   validates :grade, presence: true
   validates :full_name, uniqueness: true
+  validates :uuid, uniqueness: true
 
   before_validation :update_full_name
+  before_validation :update_uuid
 
   scope :eligible, ->(min_grade, max_grade) {
     min_grade ||= 0
@@ -24,6 +28,10 @@ class Student < ActiveRecord::Base
 
   def update_full_name
     self.full_name = "#{self.first_name} #{self.last_name}"
+  end
+
+  def update_uuid
+    self.uuid = SecureRandom::uuid unless self.uuid
   end
 
   def friendly_grade

@@ -29,6 +29,7 @@ class Walkathon::PledgesController < ApplicationController
     Walkathon::Pledge.joins(:student).where('students.parent_id = ?', current_user.id).each do |pledge|
       @walkathon_pledges[pledge.student.full_name] << pledge
     end
+    @students = current_user.students.sort_by { |s| s.full_name }
   end
 
   # GET /walkathon/pledges/1
@@ -39,6 +40,10 @@ class Walkathon::PledgesController < ApplicationController
   # GET /walkathon/pledges/new
   def new
     @walkathon_pledge = Walkathon::Pledge.new
+    if params[:sid]
+      @student = Student.where(uuid: params[:sid]).first
+      @walkathon_pledge.student_name = @student.full_name if @student
+    end
   end
 
   # GET /walkathon/pledges/1/edit

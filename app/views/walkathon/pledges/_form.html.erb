@@ -1,6 +1,6 @@
 <div class="pledge_form">
   <%= bootstrap_form_for(@walkathon_pledge, layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-6") do |f| %>
-      <%= f.text_field :student_name %>
+      <%= f.text_field :student_name, readonly: !@student.nil? %>
       <%= f.text_field :sponsor_name %>
       <%= f.phone_field :sponsor_phone, help: "in xxx-xxx-xxxx form", control_col: "col-sm-4" %>
       <%= f.email_field :sponsor_email %>
