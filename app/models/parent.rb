@@ -13,7 +13,7 @@ class Parent < ActiveRecord::Base
   has_many :students, dependent: :destroy
   has_many :enrollments, through: :students
   before_save :update_role_if_nil
-  after_create :send_welcome_mail
+  after_commit :send_welcome_mail, on: :create
 
   scope :by_name, -> {
     order(:last_name, :first_name)
