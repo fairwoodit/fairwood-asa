@@ -18,7 +18,7 @@ class Ability
         e.student.blank? || (e.student.parent == parent)
       end
 
-      can [:edit, :destroy, :update], Enrollment do
+      can [:edit, :destroy, :update, :for_all], Enrollment do
         parent.asa?
       end
 
