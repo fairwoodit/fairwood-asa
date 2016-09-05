@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   post '/enrollments/:id/cancel' => 'enrollments#do_cancel', as: :enrollment_do_cancel
   get '/enrollments/:id/cancel' => 'enrollments#cancel', as: :enrollment_cancel
 
+  get '/activities/admin/enrollments' => 'enrollments#for_all', as: :admin_enrollments
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

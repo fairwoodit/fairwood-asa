@@ -4,6 +4,7 @@ class Enrollment < ActiveRecord::Base
 
   before_save :fix_committed
 
+  scope :by_activity, -> { order(:activity_id) }
   scope :lifo, -> { order(id: :desc) }
   scope :fifo, -> { order(:id) }
   scope :low_uncommitted, -> { where(low_income: true, committed: false) }

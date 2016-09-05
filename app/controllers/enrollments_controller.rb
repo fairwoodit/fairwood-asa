@@ -14,6 +14,13 @@ class EnrollmentsController < ApplicationController
         current_parent.enrollments.lifo.partition { |e| e.activity.season == Season.last }
   end
 
+  def for_all
+    # Break up current and past enrollments into two groups.
+    @current_enrollments, @past_enrollments =
+        Enrollment.by_activity.lifo.partition { |e| e.activity.season == Season.last }
+    render :index
+  end
+
   # GET /enrollments/1
   # GET /enrollments/1.json
   def show
