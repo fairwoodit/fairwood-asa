@@ -31,9 +31,16 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
+        flash.delete(:alert)
         format.html { redirect_to action: :index, notice: 'Student was successfully created.' }
         format.json { render :show, status: :created, location: @student }
       else
+        if @student.errors.has_key?(:full_name)
+          flash[:alert] = "This student is already registered with a different parent account.<br>" \
+                          "If you believe this is in error, contact " \
+                          "<a href=\"mailto:fairwoodit@gmail.com\">the administrator</a>.".html_safe
+        end
+
         format.html { render :new }
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
@@ -118,7 +125,7 @@ class StudentsController < ApplicationController
     # Search for students based on full-names and last-names that start with the search term.
 
     search_for = "#{params[:term]}%"
-    @matches   = Student.where('full_name ilike ? or last_name ilike ?', search_for, search_for).limit(10).order("last_name, first_name").pluck(:full_name)
+    @matches = Student.where('full_name ilike ? or last_name ilike ?', search_for, search_for).limit(10).order("last_name, first_name").pluck(:full_name)
     render json: @matches
   end
 
