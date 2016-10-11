@@ -1,7 +1,15 @@
 <h2>Welcome to the Fairwood Explorer Portal</h2>
 
 <p>
-  This application provides some online services for the Fairwood Explorer community.
+  This application provides some online services for the Fairwood Explorer community.  Please
+  <% unless current_parent %>
+      <%= link_to "sign up", new_parent_registration_path %> for an account and
+  <% end %>
+  register your students in order to use these services.
+</p>
+<p>
+  Contact the IT team at fairwood-techsupport@googlegroups.com for
+  technical issues with the site.
 </p>
 
 <h3>Afterschool Activities Enrollment Service</h3>
@@ -10,20 +18,8 @@
   Explorer program.
 </p>
 <p>
-  Please
-  <% unless current_parent %>
-    <%= link_to "sign up", new_parent_registration_path %> for an account,
-  <% end %>
-  register your students
-  <% unless current_parent %>,
-  <% end %>
-  and then enroll into activities.
-</p>
-<p>
-  Contact <%= mail_to(ENV['ASA_EMAIL'], ENV['ASA_ADMIN_NAME']) %>
+  Contact <%= ENV['ASA_ADMIN_NAME'] %> at <%= ENV['ASA_EMAIL'] %>
   of the Afterschool Activities Team for questions about activities.
-  Contact the <%= mail_to('fairwood-techsupport@googlegroups.com', 'IT') %> team for
-  technical issues with the site.
 </p>
 <h3>Walkathon Pledge Service</h3>
 <p>

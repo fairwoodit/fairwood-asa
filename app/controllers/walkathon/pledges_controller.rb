@@ -86,7 +86,8 @@ class Walkathon::PledgesController < ApplicationController
 
   def record_laps
     # Record lap info for upto 10 students
-    update_count = 0
+    pledge_update_count = 0
+    lap_record_count = 0
     errors       = []
     Walkathon::Pledge.transaction do
       params[:row].keys.sort.each do |row_num|
@@ -102,7 +103,7 @@ class Walkathon::PledgesController < ApplicationController
           Walkathon::Pledge.where(student: student).each do |pledge|
             pledge.lap_count = params[:row][row_num][:lap_count]
             if pledge.save
-              update_count += 1
+              pledge_update_count += 1
             else
               # Store the validation error on this row's lap count
               errors << "student #{student_name} lap-count is invalid: #{pledge.errors[:lap_count]}"
@@ -113,13 +114,14 @@ class Walkathon::PledgesController < ApplicationController
           lap_record           = Walkathon::LapCount.find_by_student_id(student.id) || Walkathon::LapCount.new(student: student)
           lap_record.lap_count = params[:row][row_num][:lap_count]
           lap_record.save
+          lap_record_count += 1
         end
       end
       raise ActiveRecord::Rollback, "Failed validation" if errors.length > 0
     end
 
     if errors.length == 0
-      redirect_to show_record_laps_url, notice: "Updated #{update_count} pledges"
+      redirect_to show_record_laps_url, notice: "Updated #{lap_record_count} lap records, #{pledge_update_count} pledges"
     else
       flash[:errors]    = errors
       flash[:prev_rows] = params[:row]
