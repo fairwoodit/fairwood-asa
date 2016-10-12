@@ -28,8 +28,8 @@ class Student < ActiveRecord::Base
   }
 
   def trim_names
-    self.first_name.gsub(/^\s*/, '').gsub(/\s*$/, '')
-    self.last_name.gsub(/^\s*/, '').gsub(/\s*$/, '')
+    self.first_name.strip!
+    self.last_name.strip!
   end
 
   def update_full_name
