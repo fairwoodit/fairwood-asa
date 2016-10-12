@@ -13,6 +13,7 @@ class Student < ActiveRecord::Base
   validates :full_name, uniqueness: true
   validates :uuid, uniqueness: true
 
+  before_validation :trim_names
   before_validation :update_full_name
   before_validation :update_uuid
 
@@ -25,6 +26,11 @@ class Student < ActiveRecord::Base
   scope :by_name, -> {
     order(:first_name)
   }
+
+  def trim_names
+    self.first_name.gsub(/^\s*/, '').gsub(/\s*$/, '')
+    self.last_name.gsub(/^\s*/, '').gsub(/\s*$/, '')
+  end
 
   def update_full_name
     self.full_name = "#{self.first_name} #{self.last_name}"

@@ -10,6 +10,9 @@ class Parent < ActiveRecord::Base
   validates :last_name, presence: true
   validates :terms_of_service, acceptance: {message: 'Terms of Service must be accepted to proceed.'}, on: :create
 
+
+  before_validation :trim_names
+
   has_many :students, dependent: :destroy
   has_many :enrollments, through: :students
   before_save :update_role_if_nil
@@ -18,6 +21,11 @@ class Parent < ActiveRecord::Base
   scope :by_name, -> {
     order(:last_name, :first_name)
   }
+
+  def trim_names
+    self.first_name.gsub(/^\s*/, '').gsub(/\s*$/, '')
+    self.last_name.gsub(/^\s*/, '').gsub(/\s*$/, '')
+  end
 
   def update_role_if_nil
     self.role = Role::NORMAL if role.blank?

@@ -6,9 +6,16 @@ class Teacher < ActiveRecord::Base
   validates :last_name, presence: true
   validates :room, presence: true
 
+  before_validation :trim_names
+
   scope :by_name, -> {
     order(:last_name, :first_name)
   }
+
+  def trim_names
+    self.first_name.gsub(/^\s*/, '').gsub(/\s*$/, '')
+    self.last_name.gsub(/^\s*/, '').gsub(/\s*$/, '')
+  end
 
   def full_name
     "#{title} #{first_name} #{last_name}"
